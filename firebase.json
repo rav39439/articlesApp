@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "electromagnets-game",
+    "public": "dist/electromagnet",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

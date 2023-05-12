@@ -1,0 +1,50 @@
+
+<div class="dd">
+<div id="screen">
+        <img src="../assets/thinktac.png" id="image" style="display: none;" >
+        <img src="../assets/battery1.png" id="battery"  style="display: none;">
+        <img src="../assets/nail1.png" id="nail" style="display: none;">
+        <img src="../assets/pin1.png" id="pin"  style="display: none;">
+        <canvas id="canvas" ></canvas>
+        <div class="btns">
+            <div class="dropdown">
+                <select class="battery" id="dropbtn" (change)="coil()">          
+                <!-- <div class="dropdown-content"> -->
+                              <option value="0">0</option>
+                              <option value="5">5</option>
+                              <option value="20">20</option>
+                              <option value="50">50</option>
+                              <option value="120">120</option>    
+              <!-- </div>     -->
+              </select>
+              <span>Number of Turns</span>
+            </div>
+        
+            <div class="dropdown">
+                <select class="dropbtn" id="core"(change)="coil()">         
+                <!-- <div class="dropdown-content"> -->
+                              <option value="1">Iron</option>
+                              <option value=".5">Aluminium</option>
+                              <option value=".5">Wood</option> 
+              <!-- </div>     -->
+              </select>
+              <span>Core  Material</span>
+            </div>
+        
+            <div class="range-slider">
+                <div class="slider-text">
+                   
+                    <input id="myRange" class="range-slider__range" type="range"  min="1" max="5" value="1" step=".2" (change)="coil()"  thumbLabel>              
+                    <span id="range.value" class="range-slider__value">1 A</span> 
+                    <span id="temp">Current</span>
+                </div>
+            </div>
+            <!-- <button onclick="groupthem()">Group</button> -->
+        </div>
+        <div class="instraction">
+            <hr>
+            <span id="instruction"></span>
+        </div>
+
+    </div>
+</div>
