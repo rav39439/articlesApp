@@ -26,7 +26,7 @@ export class GameLoginComponent implements OnInit {
   testOtp = '123456'
   sendOTPBtnTimeDisabled = false;
   consentInput = false;
-  subscription: Subscription
+  subscription: any
   userData: any
   invalidOtp = false;
   loginSpinner: boolean = false;
@@ -73,7 +73,9 @@ export class GameLoginComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    if(typeof(this.subscription)!='undefined'){
     this.subscription.unsubscribe()
+  }
   }
 
   async verifyLoginCode() {
