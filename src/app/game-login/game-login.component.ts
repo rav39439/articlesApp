@@ -72,7 +72,7 @@ export class GameLoginComponent implements OnInit {
     })
   }
 
-  ngdOnDestroy(): void {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe()
   }
 
