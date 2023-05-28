@@ -1,0 +1,159 @@
+// ::ng-deep .mat-step-header .mat-step-icon-state-done {
+//     background-color: #43ac43 !important;
+// }
+
+// ::ng-deep .mat-horizontal-content-container {
+//     padding: 0 !important;
+// }
+
+// ::ng-deep .mat-horizontal-stepper-header {
+//     pointer-events: none !important;
+// }
+
+// .custom-card .mat-form-field-outline {
+//     background-color: antiquewhite !important;
+//     border: 1px solid rgba(0, 0, 0, 0.12) !important;
+//     width: 30%;
+//     margin:2em; 
+//   }
+//   .mat-form-field-flex:hover .mat-form-field-outline {
+//     opacity: 0;
+//     transition: none !important;
+//  }
+
+
+
+
+
+
+
+//----------------Phone Number----------------//
+.short {
+  display: 'grid';
+  grid-template-columns: 51% 49%;
+  width: 100%;
+  gap: 12px;
+
+}
+
+
+.long {}
+
+@media only screen and (min-width: 1230px) {
+  .short {
+    display: grid;
+    grid-template-columns: 51% 49%;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .long {}
+
+}
+
+@media only screen and (min-width: 402px) and (max-width: 1230px) {
+  .short {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+  }
+
+  .long {}
+
+}
+
+@media only screen and (max-width: 402px) {
+  .short {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+  }
+
+  .long {}
+}
+
+.verifyButtonPosition {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+  gap: 10px;
+}
+
+@media only screen and (max-width: 400px) {
+  .verifyButtonPosition {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 0px;
+
+  }
+
+}
+
+//-------------------------------//
+
+
+//-----------Email---------------//
+
+.shortEmail {
+  display: 'grid';
+  grid-template-columns: 51% 49%;
+  width: 100%;
+  gap: 3px;
+}
+
+.longEmail {}
+
+@media only screen and (min-width: 1230px) {
+  .shortEmail {
+    display: grid;
+    grid-template-columns: 51% 49%;
+    width: 100%;
+    gap: 3px;
+  }
+
+  .longEmail {}
+}
+
+@media only screen and (min-width: 402px) and (max-width: 1230px) {
+  .shortEmail {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+    gap: 0px;
+  }
+
+  .longEmail {}
+
+}
+
+
+@media only screen and (max-width: 402px) {
+  .shortEmail {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+    gap: 0px;
+  }
+
+  .longEmail {}
+}
+
+
+
+
+.container {}
+
+@media only screen and (min-width: 600px) and (max-width: 900px) {
+  .container {
+    height: 300px !important;
+    overflow: scroll;
+  }
+}
+
+.changeShape {
+  border-radius: 20px;
+}

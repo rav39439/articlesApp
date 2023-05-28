@@ -3,6 +3,9 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+
     "outDir": "./dist/out-tsc",
     "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,

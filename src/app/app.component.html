@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="dd">
 <div id="screen">
         <img src="../assets/thinktac.png" id="image" style="display: none;" >
@@ -9,24 +9,20 @@
         <div class="btns">
             <div class="dropdown">
                 <select class="battery" id="dropbtn" (change)="coil()">          
-                <!-- <div class="dropdown-content"> -->
                               <option value="0">0</option>
                               <option value="5">5</option>
                               <option value="20">20</option>
                               <option value="50">50</option>
                               <option value="120">120</option>    
-              <!-- </div>     -->
               </select>
               <span>Number of Turns</span>
             </div>
         
             <div class="dropdown">
                 <select class="dropbtn" id="core"(change)="coil()">         
-                <!-- <div class="dropdown-content"> -->
                               <option value="1">Iron</option>
                               <option value=".5">Aluminium</option>
                               <option value=".5">Wood</option> 
-              <!-- </div>     -->
               </select>
               <span>Core  Material</span>
             </div>
@@ -39,12 +35,30 @@
                     <span id="temp">Current</span>
                 </div>
             </div>
-            <!-- <button onclick="groupthem()">Group</button> -->
+         
+
+
         </div>
+        <div class="btns1">
+            <button (click)="pause()" class="pause">Pause <i class="fa fa-pause" aria-hidden="true"></i></button>
+            <button (click)="start()" class="pause" style="margin-left: 20px;">start <i class="fa fa-start" aria-hidden="true"></i></button>
+
+        </div>
+        
         <div class="instraction">
             <hr>
             <span id="instruction"></span>
         </div>
 
     </div>
+</div> -->
+
+
+<mat-toolbar color="primary">
+    <div class="hh">
+ 
+  <button class="ml-4"*ngFor="let link of links" (click)="navigateTo(link.path)">{{ link.title }}</button>
 </div>
+</mat-toolbar>
+
+ <router-outlet></router-outlet>
