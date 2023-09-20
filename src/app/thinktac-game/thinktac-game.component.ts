@@ -125,28 +125,35 @@ export class ThinktacGameComponent implements OnInit {
 
 
   async ngAfterViewInit() {
-    let data: any = localStorage.getItem('currentUser')
-    console.log(JSON.parse(data)[0])
-    this.saveGame.getDatabyUid(JSON.parse(data)[0].docId).then((data: any) => {
-      this.initialGamedata = data.gameState.filter((d: any) => d.gametitle == 'electromagnet')
-      console.log(this.initialGamedata)
-    })
+      //onst isRunningInsideIframe = window.self !== window.top;
 
-    if (data !== null) {
-      this.userData = JSON.parse(data)
-    }
-    this.subscription = await this.masterService.getCurrentGame('Electromagnet').subscribe(game => {
-      this.getCurrentGameId(game[0].gameId)
-      this.transferData.gameId = this.currentGameId
-    })
-    setTimeout(() => {
-      this.startTimer()
-      this.setData(this.initialGamedata)
-      this.saveInterval = setInterval(() => {
-        console.log(this.time)
-        this.transferData.PlayTime = this.time
-        this.saveGameData()
-      }, 60000)
+    // if (isRunningInsideIframe) {
+    //   this.cloudrun = true
+    // } else {
+    //   this.cloudrun = false
+    // }
+    // let data: any = localStorage.getItem('currentUser')
+    // console.log(JSON.parse(data)[0])
+    // this.saveGame.getDatabyUid(JSON.parse(data)[0].docId).then((data: any) => {
+    //   this.initialGamedata = data.gameState.filter((d: any) => d.gametitle == 'electromagnet')
+    //   console.log(this.initialGamedata)
+    // })
+
+    // if (data !== null) {
+    //   this.userData = JSON.parse(data)
+    // }
+    // this.subscription = await this.masterService.getCurrentGame('Electromagnet').subscribe(game => {
+    //   this.getCurrentGameId(game[0].gameId)
+    //   this.transferData.gameId = this.currentGameId
+    // })
+     setTimeout(() => {
+    //   this.startTimer()
+    // this.setData(null)
+    //   this.saveInterval = setInterval(() => {
+    //     console.log(this.time)
+    //     this.transferData.PlayTime = this.time
+    //     this.saveGameData()
+    //   }, 60000)
       this.canvas = new fabric.Canvas("canvas", {
         hoverCursor: "pointer",
         selection: false,
@@ -480,7 +487,6 @@ export class ThinktacGameComponent implements OnInit {
     let table = new fabric.Rect({
       left: 0,
       top: this.initial.top + 150,
-      // rx : 2,
       fill: '#bab2b5',
       width: 9,
       height: 450,
@@ -524,12 +530,11 @@ export class ThinktacGameComponent implements OnInit {
   start() {
     this.transferData.state = 'active'
     this.startTimer()
-
   }
 
   setData(data: any) {
     console.log(data)
-    if (this.initialGamedata.length != 0) {
+    if (data!=null) {
       this.c_num = this.initialGamedata[0].num
       this.core = this.initialGamedata[0].core
       this.mmf = this.initialGamedata[0].mmf

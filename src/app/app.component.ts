@@ -20,9 +20,9 @@ export class AppComponent  {
   Textractdata: any
 
   links = [
-   { path: '/', title: 'game-login' },
+   { path: '/game-login', title: 'game-login' },
     { path:'/game-registration', title: 'game-registration' },
-    { path:'/game', title: 'thinktac-games' },
+    { path:'/', title: 'thinktac-games' },
     { path:'/logout', title: 'logout' }
 
   ];
@@ -34,13 +34,24 @@ export class AppComponent  {
   }
 
   ngOnInit() {
+    let user =localStorage.getItem('currentUser')
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        if (event.urlAfterRedirects === '/logout') {
+        if (event.urlAfterRedirects == '/logout') {
           // Call your function here
           this.logout();
         }
-      }
+      //   else if(event.urlAfterRedirects == '/'){
+
+      //     if(user?.length!=0){
+      //       this.router.navigateByUrl(this.links[2].path);
+      //    }
+      //    else{
+      //       this.router.navigateByUrl(this.links[0].path)
+      //    }
+      //   }
+        
+     }
     });
   }  // m_top: any;
   // m_left: any;

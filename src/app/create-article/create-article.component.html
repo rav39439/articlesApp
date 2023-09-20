@@ -1,0 +1,81 @@
+<div class="container " style="width: 80%;  margin-bottom:40px; border-radius:12px;">
+    <div class="p-4"
+        style="border: 2px solid rgb(169, 169, 199); background-color: rgb(230, 230, 250);border-radius:16px;">
+        <h2>Create Your Content</h2>
+
+        <div class="form-group">
+            <label for="topic"
+                style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Select
+                a Category</label>
+            <select name="Subjects" style=" border-radius:10px;" id="Subject" class="form-control">
+                <option value="History">History</option>
+                <option value="Geography">Geography</option>
+                <option value="Physics">Physics</option>
+                <option value="Technology">Technology</option>
+            </select>
+        </div> <br>
+        <div class="input-group-prepend">
+            <label for="topic"
+                style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
+                Topic name</label>
+            <input type="text" style=" border-radius:10px;" id="topic" class="form-control"
+                aria-describedby="basic-addon2">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" style=" border-radius:17px;" 
+                (click)="getText()">Edit</button>
+        </div>
+
+        <div class="input-group-prepend">
+            <label for="topic"
+                style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
+                Topic Details</label>
+            <input type="text" style=" border-radius:10px;" id="topicdetails" class="form-control"
+                aria-describedby="basic-addon2">
+        </div>
+
+
+        <div class="form-group mt-3" style="width: 100%;">
+            <label for="topic"
+                style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Type
+                the Content for Your article</label>
+            <textarea id="mytextarea" placeholder="Enter note" name="note" class="form-control" rows="10"
+                style="height: 500px; width:100%; border-radius:17px;"></textarea>
+                <!-- <editor apiKey="nbk38rosoj3fg0fs00sm4hdwvt18xu7ozdfixqrxyvxunq23" [init]="tinyMceConfig"></editor> -->
+
+
+        </div><br>
+        <div class="form-group">
+            <button class="btn btn-primary" style=" border-radius:17px;" 
+                (click)="saveText()">Save note</button>
+        </div><br>
+    </div>
+
+    <div class="form-group mt-3"
+        style="border: 1px solid rgb(87, 74, 74); margin-bottom: 20px; border-radius:16px;">
+        <div class="p-4" style=" background-color: rgb(230, 230, 250);border-radius:16px;">
+            <h3>Insert Image in the article</h3>
+            <label for="topic"
+                style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
+                file details</label><br>
+
+            <input type="text" style=" border-radius:10px;" id="filename" class="form-control"
+                placeholder="Enter filename"><br>
+            <input type="file" style=" border-radius:10px;" class="form-control" id="imageInput"><br>
+            <button class="btn btn-primary" style=" border-radius:17px;" (click)="uploadImage()">Insert
+                Image</button>
+
+                <!-- <form action="/upload" method="post" id="image-form" enctype="multipart/form-data">
+                    <input type="file" name="file" id="fileInput" accept=".jpg, .jpeg, .png">
+                    <button type="submit">Upload</button>
+                  </form> -->
+        </div>
+    </div>
+</div>
+
+<div class="container  " style="width: 60%;  margin-bottom:40px; border-radius:12px;">
+    <div class="p-4" style=" background-color: rgb(230, 230, 250);width: 100%;border-radius:16px;" id="text-written">
+
+    </div>
+</div>

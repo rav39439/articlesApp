@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { Route } from '@angular/router';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireFunctionsModule } from '@angular/fire/compat/functions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GameLoginComponent } from './game-login/game-login.component';
-import { GameRegistrationComponent } from './game-registration/game-registration.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
+// import { GameLoginComponent } from './game-login/game-login.component';
+// import { GameRegistrationComponent } from './game-registration/game-registration.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AuthGuard } from './auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,35 +23,23 @@ import { LogoutComponent } from './logout/logout.component';
 export const mainRoutes: Route[] = [
   {
     path: '',
-    //component: GameLoginComponent
-    loadChildren: () => import('./game-login/game-login.module').then(m => m.GameLoginModule)
-
+   loadChildren: () => import('./create-article/create-article.module').then(m => m.CreateArticleModule),
   },
-  {
-   path: 'game-registration',
-   //component:GameRegistrationComponent
-   loadChildren: () => import('./game-registration/game-registration.module').then(m => m.GameRegistrationModule)
+  // {
+  //  path: 'game-registration',
+  //  loadChildren: () => import('./game-registration/game-registration.module').then(m => m.GameRegistrationModule)
+  // },
+  // {
+  //   path:'logout',
+  //  component:LogoutComponent,
+  //   canActivate: [AuthGuard]
 
-  },
-  {
-    path:'logout',
-  
-    //component:ThinktacGameComponent,
-   component:LogoutComponent,
+  // },
 
-    canActivate: [AuthGuard]
-
-  },
-
-  {
-    path:'game',
-  
-    //component:ThinktacGameComponent,
-    loadChildren: () => import('./thinktac-game/thinktac-game.module').then(m => m.ThinktacGameModule),
-
-    canActivate: [AuthGuard]
-
-  },
+  // {
+  //   path:'game-login',
+  //   loadChildren: () => import('./game-login/game-login.module').then(m => m.GameLoginModule),
+  // },
   
 ];
 // AngularFireModule.initializeApp(environment.firebase),
@@ -60,7 +52,9 @@ export const mainRoutes: Route[] = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    AngularFireStorageModule,
     BrowserModule,
+    EditorModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
@@ -69,7 +63,8 @@ export const mainRoutes: Route[] = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireFunctionsModule
   ],
-  providers: [],
+  providers: [{ provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

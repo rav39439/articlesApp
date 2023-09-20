@@ -178,6 +178,7 @@ input::-moz-focus-outer {
 
 @media only screen and (min-width: 300px) and (max-width: 500px) {
   .dd {
+    scale: 0.86;
     width: 70%;
     height: 100%;
     display: block;
@@ -186,6 +187,8 @@ input::-moz-focus-outer {
 
 @media only screen and (min-width: 100px) and (max-width: 300px) {
   .dd {
+    scale: 0.74;
+
     width: 100%;
     height: 100%;
     display: block;
@@ -225,20 +228,20 @@ input::-moz-focus-outer {
   // height: 100%;
 }
 
-@media only screen and (min-width: 600px) and (max-width: 900px) {
-  .container {
+// @media only screen and (min-width: 600px) and (max-width: 900px) {
+//   .container {
 
-    margin-top: 10;
-    margin-top: 315px;
-  }
+//     margin-top: 10;
+//     margin-top: 315px;
+//   }
 
-  .dd {
-    margin-top: 0px;
-    height: 272px;
-    overflow-y: scroll;
-  }
+//   .dd {
+//     margin-top: 0px;
+//     height: 100%;
+//     overflow-y: scroll;
+//   }
 
-}
+// }
 
 .pause:hover {
   color: white;

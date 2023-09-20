@@ -11,6 +11,7 @@ import { BehaviorSubject, Subscription, take, tap } from 'rxjs';
 })
 export class AuthServiceService {
   isUserLoggedin: boolean
+  notRegisteredPhone
   subscription: Subscription;
   gameUser:BehaviorSubject<any>=new BehaviorSubject<any>("")
 innerSubscription:Subscription
@@ -29,10 +30,11 @@ innerSubscription:Subscription
 
 
   loginUsingToken(token, phone) {
+    this.getUserFromCollection(phone)
+
     return this.afAuth.signInWithCustomToken(token)
       .then((re) => {
-        this.getUserFromCollection(phone)
-        const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/game';
+        const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/';
         console.log(redirectURL);
         this.isUserLoggedin = true
         this._router.navigateByUrl(redirectURL);
@@ -47,7 +49,8 @@ innerSubscription:Subscription
       return true
     }
     else {
-      return false
+     this._router.navigateByUrl('/game-login')
+     return false
     }
   }
 
