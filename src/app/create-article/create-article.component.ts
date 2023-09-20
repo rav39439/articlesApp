@@ -72,6 +72,8 @@ sub:any=[]
     const subject = (document.getElementById('Subject') as HTMLSelectElement).value;
     const topic = (document.getElementById('topic') as HTMLInputElement).value;
     const topicdetails = (document.getElementById('topicdetails') as HTMLInputElement).value;
+    let grade1 = (document.getElementById('grade')as HTMLSelectElement).value
+
 
     const result = await this.inspectDocuments(topic);
   
@@ -86,7 +88,9 @@ sub:any=[]
           Topicdetails: topicdetails,
           Subject: subject,
           time: this.currentTime,
-          topicName: topic
+          topicName: topic,
+          class:grade1
+
         }
       };
       if (result) {
@@ -119,7 +123,6 @@ sub:any=[]
 
   async getAllArticlesdocs(){
     const db = this.firestore;
-
     const collectionRef = await this.afs.collection('articles').snapshotChanges();
      let sub= collectionRef.subscribe(
         (documentChanges: DocumentChangeAction<any>[]) => {
