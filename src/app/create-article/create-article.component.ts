@@ -27,6 +27,7 @@ allrr:any=[]
   width: number;
   editorContent: string = ''; // Initial content for the editor
 sub:any=[]
+articletoBeModified:any
   height: number;
   tinyMceConfig = {
     // TinyMCE configuration options go here
@@ -69,30 +70,88 @@ sub:any=[]
   }
 
   async saveData(data: string) {
+    let dataObject
     const subject = (document.getElementById('Subject') as HTMLSelectElement).value;
     const topic = (document.getElementById('topic') as HTMLInputElement).value;
     const topicdetails = (document.getElementById('topicdetails') as HTMLInputElement).value;
     let grade1 = (document.getElementById('grade')as HTMLSelectElement).value
+    let Page:any =(document.getElementById('Page')as HTMLInputElement).value
 
 
     const result = await this.inspectDocuments(topic);
-  
-      console.log(result)
+
       const db = this.firestore;
       const collectionRef = this.afs.collection('articles').doc(subject);
       const formattedText = data.replace(/\n \+/g, '<br>');
-  
-      const dataObject = {
-        [topic]: {
-          Text: formattedText,
+
+      // const dataObject = {
+      //   [topic]: {
+      //     Text: formattedText,
+      //     Topicdetails: topicdetails,
+      //     Subject: subject,
+      //     time: this.currentTime,
+      //     topicName: topic,
+      //     class:grade1
+
+      //   }
+      // };
+
+//=---------------------------- Pagination ---------------------------------//
+
+if (this.articletoBeModified) {
+  this.articletoBeModified.Text[Page - 1] = formattedText
+  let highestIndex = -1; // Initialize with a value that's less than any valid array index
+  let maxindex:any[] = []
+  this.articletoBeModified.Text.forEach((text, index) => {                    // if (typeof articletoBeModified[i] !== 'undefined' && i > highestIndex) {
+      //     highestIndex = i;
+      // }
+      maxindex.push(index)
+  })
+  const max = Math.max(...maxindex);
+  console.log(max)
+  for (let i = 0; i < 9; i++) {
+      if (typeof (this.articletoBeModified.Text[i]) == 'undefined') {
+
+          this.articletoBeModified.Text[i] = ''
+      }
+  }
+
+  dataObject = {
+      [topic]: {
+          Text: this.articletoBeModified.Text,
           Topicdetails: topicdetails,
           Subject: subject,
           time: this.currentTime,
           topicName: topic,
-          class:grade1
+          class: grade1
+      }
 
-        }
-      };
+  };
+}
+else {
+  let b:any[] = []
+  b.push(formattedText)
+  dataObject = {
+      [topic]: {
+          Text: b,
+          Topicdetails: topicdetails,
+          Subject: subject,
+          time: this.currentTime,
+          topicName: topic,
+          class: grade1
+      }
+  };
+}
+
+
+
+
+
+//----------------------------------------------------------------------------//
+
+
+
+
       if (result) {
         collectionRef
           .update(dataObject)
@@ -118,7 +177,7 @@ sub:any=[]
     this.allArtclesdocs=[]
     this.allrr=[]
     this.getAllArticlesdocs()
-    
+
   }
 
   async getAllArticlesdocs(){
@@ -207,16 +266,19 @@ sub:any=[]
 
 
   async  getText() {
-   
+
     let alldata= this.filterdata()
       let topic=(document.getElementById('topic') as HTMLInputElement).value
       let subject=(document.getElementById('Subject') as HTMLInputElement).value
+      let Page:any =(document.getElementById('Page')as HTMLInputElement).value
+
     alldata.forEach((e:any)=>{
-      console.log(e)
       if((e.Subject==subject)&&(e.topicName==topic)){
         (document.getElementById('topicdetails') as HTMLInputElement).value=e.Topicdetails
-         tinymce.get('mytextarea').setContent(e.Text);
-         console.log(e)
+         tinymce.get('mytextarea').setContent(e.Text[Page - 1]);
+         this.articletoBeModified = e
+
+         console.log( this.articletoBeModified)
       }
     })
 
@@ -232,5 +294,5 @@ filterdata(){
 })
 return result
 }
- 
+
 }
