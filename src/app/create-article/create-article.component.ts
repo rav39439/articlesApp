@@ -15,6 +15,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestore, AngularFirestoreModule, DocumentChangeAction } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment.prod';
 import { finalize, firstValueFrom, merge } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-article',
   templateUrl: './create-article.component.html',
@@ -39,6 +40,8 @@ articletoBeModified:any
   constructor(
     private firestore: AngularFireStorage,
     protected afs: AngularFirestore,
+    private router: Router,
+
 
   ) {
 
@@ -293,6 +296,10 @@ filterdata(){
     }
 })
 return result
+}
+
+Logout(){
+  this.router.navigateByUrl('/logout')
 }
 
 }

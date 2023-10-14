@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, CollectionReference, QueryFn } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  CollectionReference,
+  QueryFn,
+} from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceFirestore } from './auth-service.firestore';
 import { BehaviorSubject, Subscription, take, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthServiceService {
-  isUserLoggedin: boolean
-  notRegisteredPhone
+  isUserLoggedin: boolean;
+  notRegisteredPhone;
   subscription: Subscription;
-  gameUser:BehaviorSubject<any>=new BehaviorSubject<any>("")
-innerSubscription:Subscription
+  gameUser: BehaviorSubject<any> = new BehaviorSubject<any>('');
+  innerSubscription: Subscription;
   constructor(
-
     private _httpClient: HttpClient,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -24,37 +27,51 @@ innerSubscription:Subscription
     private _activatedRoute: ActivatedRoute,
     private authFireUsers: AuthServiceFirestore
   ) {
-
-    this.isUserLoggedin = false
+    this.isUserLoggedin = false;
   }
 
-
   loginUsingToken(token, phone) {
-    this.getUserFromCollection(phone)
+    this.getUserFromCollection(phone);
 
-    return this.afAuth.signInWithCustomToken(token)
+    return this.afAuth
+      .signInWithCustomToken(token)
       .then((re) => {
-        const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/';
+        const redirectURL =
+          this._activatedRoute.snapshot.queryParamMap.get('redirectURL') || '/';
         console.log(redirectURL);
-        this.isUserLoggedin = true
+        this.isUserLoggedin = true;
         this._router.navigateByUrl(redirectURL);
-      }).catch(e => {
-        return false
       })
+      .catch((e) => {
+        return false;
+      });
+  }
+
+  setUser(user,phone) {
+    //if (user) {
+      if(phone=='+917026912304'){
+        localStorage.setItem('user',user);
+
+      }
+      
+     this._router.navigateByUrl('/createArticle');
+    // } else {
+    //   this._router.navigate)
+    // }
   }
 
   AuthLogin(): boolean {
-    let user:any = localStorage.getItem('currentUser')
+    let user:any = localStorage.getItem('user')
     if (user!=null) {
+
       return true
     }
     else {
-     this._router.navigateByUrl('/game-login')
-     return false
+      return false
+
+    // this._router.navigateByUrl('/game-login')
     }
   }
-
-
 
   getCurrentAuthUser(phone: any) {
     // console.log(phone)
@@ -69,19 +86,18 @@ innerSubscription:Subscription
     // return this.authFireUsers.
   }
 
-
-   async getUserFromCollection(phone: any):Promise<any> {
-    this.authFireUsers.getDatabyParams(phone).subscribe((data:any) => {
-      if(data.length!=0){
+  async getUserFromCollection(phone: any): Promise<any> {
+    this.authFireUsers.getDatabyParams(phone).subscribe((data: any) => {
+      if (data.length != 0) {
         this.gameUser.next(data);
-        localStorage.setItem("currentUser", JSON.stringify(data));
+        localStorage.setItem('currentUser', JSON.stringify(data));
       }
-    })
-    return await this.authFireUsers.getDatabyParams(phone).pipe()
+    });
+    return await this.authFireUsers.getDatabyParams(phone).pipe();
   }
 
   getAllgames() {
-   this.authFireUsers.collection$()
+    this.authFireUsers.collection$();
   }
 
   ngOnDestroy() {
