@@ -2,7 +2,11 @@
     <div class="p-4"
         style="border: 2px solid rgb(169, 169, 199); background-color: rgb(230, 230, 250);border-radius:16px;">
         <h2>Create Your Content</h2>
-
+        <label for="topic"
+        style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Upload for reference</label>
+        <div class="input-group-prepend">
+          <input  type="checkbox" id="AI" name="AI" checked [(ngModel)]="isChecked">
+      </div>
         <div class="form-group">
             <label for="topic"
                 style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Select
@@ -28,6 +32,26 @@
                 <option value="11">class 11</option>
             </select>
         </div> <br>
+
+        <div class="input-group-prepend">
+          <label for="topic"
+              style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
+              Questions to this topic</label>
+          <input type="text" style=" border-radius:10px;" id="question" class="form-control"
+              aria-describedby="basic-addon2">
+      </div>
+      <div class="" style="display:flex;flex-direction: row;">
+        <div class="form-group">
+          <button class="btn btn-primary" style=" border-radius:17px;" (click)="addQuestion()">Add tags</button>
+      </div>
+
+      <div class="form-group ml-4">
+        <button class="btn btn-primary" style=" border-radius:17px;" (click)="addtagsTopage()">submit tags</button>
+    </div>
+      </div>
+
+
+
         <div class="input-group-prepend">
             <label for="topic"
                 style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
@@ -52,9 +76,12 @@
           <label for="Page"
               style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
               Page Number</label>
-              <input type="number" style="border-radius: 10px;" id="Page" class="form-control" value="1" aria-describedby="basic-addon2" max="15" min="1">
+              <input type="number" style="border-radius: 10px;" id="Page" class="form-control" value="1" aria-describedby="basic-addon2" max="15" min="1" >
 
       </div>
+
+
+
 
         <div class="form-group mt-3" style="width: 100%;">
             <label for="topic"
@@ -69,6 +96,10 @@
         <div class="form-group">
             <button class="btn btn-primary" style=" border-radius:17px;" (click)="saveText()">Save note</button>
         </div><br>
+
+        <div class="form-group">
+          <button class="btn btn-primary" style=" border-radius:17px;" (click)="savetagList()">SaveForref</button>
+      </div><br>
     </div>
 
     <div class="form-group mt-3" style="border: 1px solid rgb(87, 74, 74); margin-bottom: 20px; border-radius:16px;">
