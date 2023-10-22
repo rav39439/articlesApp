@@ -38,6 +38,7 @@ export class CreateArticleComponent implements OnInit {
   editorContent: string = ''; // Initial content for the editor
   sub: any = [];
   articletoBeModified: any;
+  addText:any[]=[]
   height: number;
   tinyMceConfig = {
     // TinyMCE configuration options go here
@@ -103,7 +104,7 @@ export class CreateArticleComponent implements OnInit {
     const db = this.firestore;
     const collectionRef = this.afs.collection('articles').doc(subject);
     const formattedText = data.replace(/\n \+/g, '<br>');
-
+//this.addText.push(formattedText)
     // const dataObject = {
     //   [topic]: {
     //     Text: formattedText,
@@ -120,12 +121,8 @@ export class CreateArticleComponent implements OnInit {
 
     if (this.articletoBeModified) {
       this.articletoBeModified.Text[Page - 1] = formattedText;
-      let highestIndex = -1; // Initialize with a value that's less than any valid array index
       let maxindex: any[] = [];
       this.articletoBeModified.Text.forEach((text, index) => {
-        // if (typeof articletoBeModified[i] !== 'undefined' && i > highestIndex) {
-        //     highestIndex = i;
-        // }
         maxindex.push(index);
       });
       const max = Math.max(...maxindex);
@@ -147,7 +144,7 @@ export class CreateArticleComponent implements OnInit {
       };
 
       dataObject1 = {
-        Text: formattedText,
+        Text: this.addText,
         Topicdetails: topicdetails,
         Subject: subject,
         time: this.currentTime,
@@ -169,7 +166,7 @@ export class CreateArticleComponent implements OnInit {
         },
       };
       dataObject1 = {
-        Text: formattedText,
+        Text: this.addText,
         Topicdetails: topicdetails,
         Subject: subject,
         time: this.currentTime,
@@ -200,15 +197,29 @@ export class CreateArticleComponent implements OnInit {
           });
       }
     } else {
-      this.allArtclesdocs[0]['Articledata'].push(dataObject1);
+      let index=this.allArtclesdocs[0]['Articledata'].findIndex(e=>e.topicName==dataObject1.topicName)
+      if(index>-1){
+        this.allArtclesdocs[0]['Articledata'][index]=dataObject1;
+
+      }
+      else{
+        this.allArtclesdocs[0]['Articledata'].push(dataObject1);
+
+      }
       let data1 = {
         Articledata: this.allArtclesdocs[0]['Articledata'],
       };
-      this.afs.collection('articles').doc('AIcollection').set(data1,{merge:true})
-      this.savetagList();
+      console.log(data1);
+      this.afs
+        .collection('articles')
+        .doc('AIcollection')
+        .set(data1, { merge: true });
+      this.savetagList(
+        dataObject1,
+        index
+      );
     }
     this.questions = [];
-    this.tags = [];
     this.allArtclesdocs = [];
     this.allrr = [];
     this.getAllArticlesdocs();
@@ -217,30 +228,34 @@ export class CreateArticleComponent implements OnInit {
     });
   }
 
-  savetagList() {
+  savetagList(de, sz) {
+
+    let indexes=this.checkDup(sz)
     let t: any[] = [];
-    this.allArtclesdocs[0]['Articledata'].forEach((elm) => {
-      if(elm.questions.length>0){
-
-        if (elm.questions[0].includes(',')){
-          console.log(elm.questions[0].split(','))
-
-          elm.questions[0].split(',').forEach((o) => {
-            t.push(o);
-          });
-        }
-        else{
-          t.push(elm.questions[0])
-        }
-      }
-
-    });
-
-    console.log(t);
-    let d={
-      Tags:t
+  this.tags.forEach((tag)=>{
+    let obj={
+      doc:de.topicName,
+      tag:tag
     }
-    this.afs.collection('articles').doc('tags').set(d,{merge:true})
+    this.allArtclesdocs[5]['Tags'].push(obj)
+  })
+    let d = {
+      Tags: this.allArtclesdocs[5]['Tags']
+    };
+    this.afs.collection('articles').doc('tags').set(d, { merge: true }).then(()=>{
+      this.tags = [];
+
+    })
+  }
+
+  checkDup(sz){
+    const indices = this.allArtclesdocs[5]['Tags'].reduce((accumulator, element, index) => {
+      if (element === sz) {
+        accumulator.push(index);
+      }
+      return accumulator;
+    }, []);
+    return indices
   }
 
   async getAllArticlesdocs() {
@@ -357,7 +372,7 @@ export class CreateArticleComponent implements OnInit {
   filterdata() {
     let result: any = [];
     this.allArtclesdocs.forEach((doc) => {
-      let keys = Object.keys(doc);
+      let keys = Object.keys( doc);
       for (const el in doc) {
         result.push(doc[el]);
       }
@@ -372,17 +387,6 @@ export class CreateArticleComponent implements OnInit {
     this.tags.push(question);
     this.questions[Page - 1] = question;
   }
-
-  // getAIdata(){
-  //   return new Promise((resolve,reject)=>{
-  //     this.afs.collection('articles').doc().snapshotChanges().subscribe(d=>{
-  // console.log(d.payload.data())
-  //       resolve(d.payload.data())
-  //     })
-
-  //   })
-
-  // }
 
   Logout() {
     this.router.navigateByUrl('/logout');
@@ -399,6 +403,29 @@ export class CreateArticleComponent implements OnInit {
   addtagsTopage() {
     let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
     this.questions[Page - 1] = this.tags.join(',');
-    this.tags = [];
+    // this.tags = [];
   }
+
+  addExtraText(){
+    const text = tinymce.get('mytextarea').getContent();
+    const formattedText = text.replace(/\n \+/g, '<br>');
+
+    this.addText.push(formattedText)
+  }
+
+  EditInAI(){
+    let index
+    const topic = (document.getElementById('topic') as HTMLInputElement).value;
+
+    index=this.allArtclesdocs[0]['Articledata'].findIndex(e=>e.topicName==topic)
+
+
+    (document.getElementById('grade') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].grade
+    (document.getElementById('topicdetails') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].topicdetails
+    (document.getElementById('mytextarea') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].Text
+    (document.getElementById('question') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].questions
+
+
+  }
+
 }
