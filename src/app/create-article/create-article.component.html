@@ -36,7 +36,7 @@
         <div class="input-group-prepend">
           <label for="topic"
               style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
-              Questions to this topic</label>
+              Add tags to this topic</label>
           <input type="text" style=" border-radius:10px;" id="question" class="form-control"
               aria-describedby="basic-addon2">
       </div>
@@ -49,6 +49,26 @@
         <button class="btn btn-primary" style=" border-radius:17px;" (click)="addtagsTopage()">submit tags</button>
     </div>
       </div>
+
+
+      <div class="input-group-prepend">
+        <label for="tags"
+            style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            Add tags to this paragraph</label>
+        <input type="text" style=" border-radius:10px;" id="tags" class="form-control"
+            aria-describedby="basic-addon2">
+            <!-- <input type="number" style=" border-radius:10px; margin-top: 10px;" id="paraNo" class="form-control"
+            aria-describedby="basic-addon2"> -->
+    </div>
+    <div class="mt-2 mb-2" style="display:flex;flex-direction: row;">
+      <div class="form-group">
+        <button class="btn btn-primary" style=" border-radius:17px;" (click)="addtagstopara()">Add tags to para</button>
+    </div>
+    <!-- <div class="form-group">
+      <button class="btn btn-primary" style=" border-radius:17px;" (click)="submitTagstopara()">submit tags to para</button>
+  </div> -->
+    </div>
+
 
 
 
@@ -141,3 +161,7 @@
 
 
 </div>
+
+
+
+

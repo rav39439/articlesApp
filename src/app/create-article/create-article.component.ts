@@ -20,6 +20,9 @@ import {
 import { environment } from 'src/environments/environment.prod';
 import { finalize, firstValueFrom, merge } from 'rxjs';
 import { Router } from '@angular/router';
+
+
+
 @Component({
   selector: 'app-create-article',
   templateUrl: './create-article.component.html',
@@ -28,6 +31,7 @@ import { Router } from '@angular/router';
 export class CreateArticleComponent implements OnInit {
   currentTime = Date.now();
   allrr: any = [];
+  paragraphTags:any[]=[]
   aiText: any[] = [];
   isChecked: boolean = true;
   question: string;
@@ -404,13 +408,17 @@ export class CreateArticleComponent implements OnInit {
     let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
     this.questions[Page - 1] = this.tags.join(',');
     // this.tags = [];
+
   }
 
   addExtraText(){
     const text = tinymce.get('mytextarea').getContent();
     const formattedText = text.replace(/\n \+/g, '<br>');
+    let valNo:any= (document.getElementById('paraNo') as HTMLInputElement).value
+    let stringgen=this.paragraphTags.join(',')
+    let html=`<p id=mmrg>${stringgen}</p>`
+    this.addText.push(formattedText+html)
 
-    this.addText.push(formattedText)
   }
 
   EditInAI(){
@@ -421,9 +429,21 @@ export class CreateArticleComponent implements OnInit {
 
 
     (document.getElementById('grade') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].grade
-    (document.getElementById('topicdetails') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].topicdetails
-    (document.getElementById('mytextarea') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].Text
-    (document.getElementById('question') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].questions
+    (document.getElementById('topicdetails') as HTMLInputElement).value=this.allArtclesdocs[0]['Articledata'][index].topicdetails
+    (document.getElementById('mytextarea') as HTMLInputElement).value=this.allArtclesdocs[0]['Articledata'][index].Text
+    (document.getElementById('question') as HTMLInputElement).value=this.allArtclesdocs[0]['Articledata'][index].questions
+
+
+  }
+
+  addtagstopara(){
+   let val= (document.getElementById('tags') as HTMLInputElement).value
+
+   this.paragraphTags.push(val)
+
+  }
+
+  submitTagstopara(){
 
 
   }
