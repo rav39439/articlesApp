@@ -33,6 +33,7 @@ export class CreateArticleComponent implements OnInit {
   allrr: any = [];
   paragraphTags:any[]=[]
   aiText: any[] = [];
+  topicName
   isChecked: boolean = true;
   question: string;
   tags: any = [];
@@ -108,6 +109,21 @@ export class CreateArticleComponent implements OnInit {
     const db = this.firestore;
     const collectionRef = this.afs.collection('articles').doc(subject);
     const formattedText = data.replace(/\n \+/g, '<br>');
+    const question = (document.getElementById('question') as HTMLInputElement)
+    .value;
+    console.log('this is topic name')
+    console.log(topic)
+    let ntopic=topic.split(' ')
+    if(ntopic.length>1){
+      ntopic.forEach((top)=>{
+        this.tags.push(top);
+      })
+    }
+    else{
+      this.tags.push(topic)
+    }
+  this.addtagsTopage()
+
 //this.addText.push(formattedText)
     // const dataObject = {
     //   [topic]: {
@@ -179,6 +195,8 @@ export class CreateArticleComponent implements OnInit {
         questions: this.questions,
       };
     }
+    console.log("dataobkect1")
+    console.log(dataObject1)
     //----------------------------------------------------------------------------//
     if (!this.isChecked) {
       if (result) {
@@ -239,7 +257,6 @@ export class CreateArticleComponent implements OnInit {
   this.tags.forEach((tag)=>{
     let obj={
       doc:de.topicName,
-      tag:tag
     }
     this.allArtclesdocs[5]['Tags'].push(obj)
   })
@@ -414,33 +431,30 @@ export class CreateArticleComponent implements OnInit {
   addExtraText(){
     const text = tinymce.get('mytextarea').getContent();
     const formattedText = text.replace(/\n \+/g, '<br>');
-    let valNo:any= (document.getElementById('paraNo') as HTMLInputElement).value
+    let topic = (document.getElementById('topic') as HTMLInputElement).value;
+    // let valNo:any= (document.getElementById('paraNo') as HTMLInputElement).value
     let stringgen=this.paragraphTags.join(',')
-    let html=`<p id=mmrg>${stringgen}</p>`
+    let html=`<p id=mmrg style="display: none;">${stringgen}</p>`
     this.addText.push(formattedText+html)
-
+    this.topicName=topic
+this.paragraphTags=[]
   }
 
   EditInAI(){
     let index
     const topic = (document.getElementById('topic') as HTMLInputElement).value;
-
     index=this.allArtclesdocs[0]['Articledata'].findIndex(e=>e.topicName==topic)
-
-
     (document.getElementById('grade') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].grade
     (document.getElementById('topicdetails') as HTMLInputElement).value=this.allArtclesdocs[0]['Articledata'][index].topicdetails
     (document.getElementById('mytextarea') as HTMLInputElement).value=this.allArtclesdocs[0]['Articledata'][index].Text
     (document.getElementById('question') as HTMLInputElement).value=this.allArtclesdocs[0]['Articledata'][index].questions
 
-
   }
 
   addtagstopara(){
    let val= (document.getElementById('tags') as HTMLInputElement).value
-
    this.paragraphTags.push(val)
-
+   this.tags.push(val)
   }
 
   submitTagstopara(){
