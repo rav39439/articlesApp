@@ -112,11 +112,18 @@ export class CreateArticleComponent implements OnInit {
     const question = (document.getElementById('question') as HTMLInputElement)
     .value;
     console.log('this is topic name')
-    console.log(topic)
-    let ntopic=topic.split(' ')
+    console.log(topicdetails)
+    let ntopic=topicdetails.split(' ')
     if(ntopic.length>1){
-      ntopic.forEach((top)=>{
-        this.tags.push(top);
+      ntopic.forEach((top:any)=>{
+        if(top.includes('|')){
+          top.split('|').forEach((t)=>{
+            this.tags.push(t);
+          })
+        }
+        else{
+          this.tags.push(top)
+        }
       })
     }
     else{
@@ -257,6 +264,7 @@ export class CreateArticleComponent implements OnInit {
   this.tags.forEach((tag)=>{
     let obj={
       doc:de.topicName,
+      tag:tag
     }
     this.allArtclesdocs[5]['Tags'].push(obj)
   })
