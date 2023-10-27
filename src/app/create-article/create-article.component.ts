@@ -440,7 +440,11 @@ export class CreateArticleComponent implements OnInit {
     const text = tinymce.get('mytextarea').getContent();
     const formattedText = text.replace(/\n \+/g, '<br>');
     let topic = (document.getElementById('topic') as HTMLInputElement).value;
+    const topicdetails = (
+      document.getElementById('topicdetails') as HTMLInputElement
+    ).value;
     // let valNo:any= (document.getElementById('paraNo') as HTMLInputElement).value
+    this.paragraphTags.push(topicdetails)
     let stringgen=this.paragraphTags.join(',')
     let html=`<p id=mmrg style="display: none;">${stringgen}</p>`
     this.addText.push(formattedText+html)
