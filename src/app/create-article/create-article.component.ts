@@ -1,5 +1,5 @@
 /// <reference types="tinymce" />
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,AfterViewInit} from '@angular/core';
 declare var tinymce: any; // Declare the TinyMCE variable
 
 // import * as firebase from 'firebase/app';
@@ -28,12 +28,13 @@ import { Router } from '@angular/router';
   templateUrl: './create-article.component.html',
   styleUrls: ['./create-article.component.scss'],
 })
-export class CreateArticleComponent implements OnInit {
+export class CreateArticleComponent implements OnInit , AfterViewInit {
   currentTime = Date.now();
   allrr: any = [];
   paragraphTags:any[]=[]
   aiText: any[] = [];
   topicName
+  selectedEdit
   isChecked: boolean = true;
   question: string;
   tags: any = [];
@@ -59,6 +60,10 @@ export class CreateArticleComponent implements OnInit {
     private router: Router
   ) {
     initializeApp(environment.firebase);
+  }
+  ngAfterViewInit(): void {
+    //this.editorContent = tinymce.editor.getContent();
+
   }
   async ngOnInit() {
     this.getAllArticlesdocs();
@@ -454,12 +459,25 @@ this.paragraphTags=[]
 
   EditInAI(){
     let index
+    let selectelm
+    // index=this.allArtclesdocs[0].Articledata.findIndex(e=>e.topicName==topic)
     const topic = (document.getElementById('topic') as HTMLInputElement).value;
-    index=this.allArtclesdocs[0]['Articledata'].findIndex(e=>e.topicName==topic)
-    (document.getElementById('grade') as HTMLSelectElement).value=this.allArtclesdocs[0]['Articledata'][index].grade
-    (document.getElementById('topicdetails') as HTMLInputElement).value=this.allArtclesdocs[0]['Articledata'][index].topicdetails
-    (document.getElementById('mytextarea') as HTMLInputElement).value=this.allArtclesdocs[0]['Articledata'][index].Text
-    (document.getElementById('question') as HTMLInputElement).value=this.allArtclesdocs[0]['Articledata'][index].questions
+    let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
+    let texthtml: any = (document.getElementById('jj') as HTMLElement);
+
+    this.allArtclesdocs[0]['Articledata'].forEach((h)=>{
+      if(h.topicName==topic){
+        selectelm=h
+        this.selectedEdit=selectelm
+      }
+    })
+    texthtml.innerHTML=selectelm.Text[Page-1]
+    let ptag=(document.getElementById('mmrg') as HTMLElement)
+    if(typeof(document.getElementById('mmrg'))!=='undefined'&& document.getElementById('mmrg')!==null){
+
+    ptag.style.display='block'
+    tinymce.get('mytextarea').setContent(texthtml.innerHTML);
+    }
 
   }
 
@@ -469,9 +487,52 @@ this.paragraphTags=[]
    this.tags.push(val)
   }
 
-  submitTagstopara(){
+  submitEdit(){
+    let ptag
+    let html=``
+    let arrtags:any[]=[]
+    let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
+    let text1 = tinymce.get('mytextarea').getContent();
 
+    let texthtml: any = (document.getElementById('jj') as HTMLElement);
+    texthtml.innerHTML=tinymce.get('mytextarea').getContent();
+    if(typeof(document.getElementById('mmrg'))!=='undefined'&& document.getElementById('mmrg')!==null){
+   //   if(document.getElementById('mmrg')!==null){
+        (document.getElementById('mmrg') as HTMLElement).style.display='none'
+        ptag=(document.getElementById('mmrg') as HTMLElement).innerText
+    //  }
+    arrtags=ptag.split(' ')
 
+    }
+    else{
+    //  if(document.getElementById('mmrg')!==null){
+
+      let stringgen=this.paragraphTags.join(',')
+      html=`<p id=mmrg style="display: none;">${stringgen}</p>`
+      arrtags=this.paragraphTags
+   //   }
+    }
+
+    let questiontags
+    if(this.selectedEdit.questions[0].includes(',')){
+      questiontags=this.selectedEdit.questions[0].split(',')
+
+    }
+    else{
+    questiontags=this.selectedEdit.questions[0].split(' ')
+
+    }
+    let filteredtags=arrtags.filter(e=>!questiontags.includes(e))
+    this.selectedEdit.questions[0]=filteredtags.concat(questiontags).join(',')
+
+    this.selectedEdit.Text[Page-1]=texthtml.innerHTML+html
+    this.paragraphTags=[]
+
+  }
+
+  completeEditsubmit(){
+    console.log('this.is a final submit')
+    console.log(this.selectedEdit)
   }
 
 }
