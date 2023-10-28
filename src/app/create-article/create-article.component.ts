@@ -484,17 +484,14 @@ this.paragraphTags=[]
     const topicdetails = (
       document.getElementById('topicdetails') as HTMLInputElement
     ).value;
+    this.selectedEdit.Topicdetails=topicdetails
     let texthtml: any = (document.getElementById('jj') as HTMLElement);
     texthtml.innerHTML=tinymce.get('mytextarea').getContent();
     if(typeof(document.getElementById('mmrg'))!=='undefined'&& document.getElementById('mmrg')!==null){
-   //   if(document.getElementById('mmrg')!==null){
         (document.getElementById('mmrg') as HTMLElement).style.display='none'
         ptag=(document.getElementById('mmrg') as HTMLElement).innerText
-    //  }
     arrtags=ptag.split(' ')
     this.changedTags=arrtags
-
-
     }
     else{
       this.paragraphTags.push(topicdetails)
