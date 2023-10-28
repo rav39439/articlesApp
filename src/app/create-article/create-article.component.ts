@@ -500,7 +500,7 @@ this.paragraphTags=[]
       if(topicdetails.includes('|')){
         let d=topicdetails.split('|')
         d.forEach((e)=>{
-          this.paragraphTags.push(topicdetails)
+          this.paragraphTags.push(e)
         })
       }
       else{
@@ -525,7 +525,7 @@ this.paragraphTags=[]
     }
     let filteredtags=arrtags.filter(e=>!questiontags.includes(e))
 
-let resultantTags=this.removeDuplicates(filteredtags.concat(questiontags).join(','))
+let resultantTags=this.removeDuplicates(filteredtags.concat(questiontags)).join(',')
     this.selectedEdit.questions[0]=resultantTags
     //let mergedArray = Array.from(new Set([...array1, ...array2]));
 
