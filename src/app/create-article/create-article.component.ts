@@ -497,15 +497,15 @@ this.paragraphTags=[]
     this.changedTags=arrtags
     }
     else{
-      if(topicdetails.includes('|')){
-        let d=topicdetails.split('|')
-        d.forEach((e)=>{
-          this.paragraphTags.push(e)
-        })
-      }
-      else{
-        this.paragraphTags.push(topicdetails)
-      }
+      // if(topicdetails.includes('|')){
+      //   let d=topicdetails.split('|')
+      //   d.forEach((e)=>{
+      //     this.paragraphTags.push(e)
+      //   })
+      // }
+      // else{
+      //   this.paragraphTags.push(topicdetails)
+      // }
 
       let stringgen=this.paragraphTags.join(',')
       html=`<p id=mmrg style="display: none;">${stringgen}</p>`
