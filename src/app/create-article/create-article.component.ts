@@ -481,7 +481,9 @@ this.paragraphTags=[]
     let arrtags:any[]=[]
     let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
     let text1 = tinymce.get('mytextarea').getContent();
-
+    const topicdetails = (
+      document.getElementById('topicdetails') as HTMLInputElement
+    ).value;
     let texthtml: any = (document.getElementById('jj') as HTMLElement);
     texthtml.innerHTML=tinymce.get('mytextarea').getContent();
     if(typeof(document.getElementById('mmrg'))!=='undefined'&& document.getElementById('mmrg')!==null){
@@ -495,6 +497,8 @@ this.paragraphTags=[]
 
     }
     else{
+      this.paragraphTags.push(topicdetails)
+
       let stringgen=this.paragraphTags.join(',')
       html=`<p id=mmrg style="display: none;">${stringgen}</p>`
       arrtags=this.paragraphTags
