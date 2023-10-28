@@ -117,8 +117,7 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
     const formattedText = data.replace(/\n \+/g, '<br>');
     const question = (document.getElementById('question') as HTMLInputElement)
     .value;
-    console.log('this is topic name')
-    console.log(topicdetails)
+
     let ntopic=topicdetails.split(' ')
     if(ntopic.length>1){
       ntopic.forEach((top:any)=>{
@@ -498,7 +497,15 @@ this.paragraphTags=[]
     this.changedTags=arrtags
     }
     else{
-      this.paragraphTags.push(topicdetails)
+      if(topicdetails.includes('|')){
+        let d=topicdetails.split('|')
+        d.forEach((e)=>{
+          this.paragraphTags.push(topicdetails)
+        })
+      }
+      else{
+        this.paragraphTags.push(topicdetails)
+      }
 
       let stringgen=this.paragraphTags.join(',')
       html=`<p id=mmrg style="display: none;">${stringgen}</p>`
@@ -518,8 +525,8 @@ this.paragraphTags=[]
     }
     let filteredtags=arrtags.filter(e=>!questiontags.includes(e))
 
-
-    this.selectedEdit.questions[0]=filteredtags.concat(questiontags).join(',')
+let resultantTags=this.removeDuplicates(filteredtags.concat(questiontags).join(','))
+    this.selectedEdit.questions[0]=resultantTags
     //let mergedArray = Array.from(new Set([...array1, ...array2]));
 
 
@@ -527,6 +534,8 @@ this.paragraphTags=[]
     this.paragraphTags=[]
 
   }
+
+
 
   completeEditsubmit(){
     // console.log('this.is a final submit')
