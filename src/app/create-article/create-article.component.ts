@@ -35,6 +35,7 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
   aiText: any[] = [];
   topicName
   selectedEdit
+  changedTags:any[]=[]
   isChecked: boolean = true;
   question: string;
   tags: any = [];
@@ -135,19 +136,6 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
       this.tags.push(topic)
     }
   this.addtagsTopage()
-
-//this.addText.push(formattedText)
-    // const dataObject = {
-    //   [topic]: {
-    //     Text: formattedText,
-    //     Topicdetails: topicdetails,
-    //     Subject: subject,
-    //     time: this.currentTime,
-    //     topicName: topic,
-    //     class:grade1
-
-    //   }
-    // };
 
     //=---------------------------- Pagination ---------------------------------//
 
@@ -502,15 +490,16 @@ this.paragraphTags=[]
         ptag=(document.getElementById('mmrg') as HTMLElement).innerText
     //  }
     arrtags=ptag.split(' ')
+    this.changedTags=arrtags
+
 
     }
     else{
-    //  if(document.getElementById('mmrg')!==null){
-
       let stringgen=this.paragraphTags.join(',')
       html=`<p id=mmrg style="display: none;">${stringgen}</p>`
       arrtags=this.paragraphTags
-   //   }
+      this.changedTags=arrtags
+
     }
 
     let questiontags
@@ -531,8 +520,46 @@ this.paragraphTags=[]
   }
 
   completeEditsubmit(){
-    console.log('this.is a final submit')
-    console.log(this.selectedEdit)
+    // console.log('this.is a final submit')
+    // console.log(this.selectedEdit)
+    let index=this.allArtclesdocs[0]['Articledata'].findIndex(e=>e.topicName==this.selectedEdit.topicName)
+    if(index>-1){
+      this.allArtclesdocs[0]['Articledata'][index]=this.selectedEdit;
+
+    }
+    else{
+      this.allArtclesdocs[0]['Articledata'].push(this.selectedEdit);
+
+    }
+    let data1 = {
+      Articledata: this.allArtclesdocs[0]['Articledata'],
+    };
+    console.log(data1);
+    this.afs
+      .collection('articles')
+      .doc('AIcollection')
+      .set(data1, { merge: true });
+    this.savetagnewTags(
+      this.selectedEdit
+    );
+  }
+
+
+  savetagnewTags(selectedData){
+    this.changedTags.forEach((tag)=>{
+      let obj={
+        doc:selectedData.topicName,
+        tag:tag
+      }
+      this.allArtclesdocs[5]['Tags'].push(obj)
+    })
+      let d = {
+        Tags: this.allArtclesdocs[5]['Tags']
+      };
+      this.afs.collection('articles').doc('tags').set(d, { merge: true }).then(()=>{
+        this.changedTags = [];
+
+      })
   }
 
 }
