@@ -513,7 +513,11 @@ this.paragraphTags=[]
 
     }
     let filteredtags=arrtags.filter(e=>!questiontags.includes(e))
+
+
     this.selectedEdit.questions[0]=filteredtags.concat(questiontags).join(',')
+    //let mergedArray = Array.from(new Set([...array1, ...array2]));
+
 
     this.selectedEdit.Text[Page-1]=texthtml.innerHTML+html
     this.paragraphTags=[]
