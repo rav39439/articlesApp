@@ -459,6 +459,10 @@ this.paragraphTags=[]
         this.selectedEdit=selectelm
       }
     })
+    if(document.getElementById('topicdetails') as HTMLInputElement){
+      (document.getElementById('topicdetails') as HTMLInputElement).value=this.selectedEdit.Topicdetails
+
+    }
     texthtml.innerHTML=selectelm.Text[Page-1]
     let ptag=(document.getElementById('mmrg') as HTMLElement)
     if(typeof(document.getElementById('mmrg'))!=='undefined'&& document.getElementById('mmrg')!==null){
