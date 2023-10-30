@@ -202,7 +202,7 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
         collectionRef
           .update(dataObject)
           .then(() => {
-            console.log('Document written with ID: ');
+            console.log('Doc wrttien successfully ');
           })
           .catch((error) => {
             console.error('Error adding document: ', error);
@@ -250,10 +250,11 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
   }
 
   savetagList(de, sz) {
-
+   let alltags= this.allArtclesdocs[5]['Tags'].map(t=>t.tag)
+    const updatedTags = this.tags.filter(e=>!alltags.includes(e))
     let indexes=this.checkDup(sz)
     let t: any[] = [];
-  this.tags.forEach((tag)=>{
+    updatedTags.forEach((tag)=>{
     let obj={
       doc:de.topicName,
       tag:tag
@@ -564,7 +565,9 @@ let resultantTags=this.removeDuplicates(filteredtags.concat(questiontags)).join(
 
 
   savetagnewTags(selectedData){
-    this.changedTags.forEach((tag)=>{
+    let alltags= this.allArtclesdocs[5]['Tags'].map(t=>t.tag)
+    const updatedTags = this.changedTags.filter(e=>!alltags.includes(e))
+    updatedTags.forEach((tag)=>{
       let obj={
         doc:selectedData.topicName,
         tag:tag
