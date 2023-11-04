@@ -314,7 +314,9 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
   }
 
   removeDuplicates(arr) {
-    return arr.filter((value, index, self) => self.indexOf(value) === index);
+    return arr.filter((value, index, self) => {
+      return self.indexOf(value) === index;
+    });
   }
 
   uploadImage() {
@@ -483,8 +485,9 @@ this.paragraphTags=[]
     let ptag
     let html=``
     let arrtags:any[]=[]
+    let allhtml=``
+
     let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
-    let text1 = tinymce.get('mytextarea').getContent();
     const topicdetails = (
       document.getElementById('topicdetails') as HTMLInputElement
     ).value;
@@ -528,10 +531,34 @@ this.paragraphTags=[]
       questiontags=this.selectedEdit.questions[0].split(' ')
 
     }
-    let filteredtags=arrtags.filter(e=>!questiontags.includes(e))
+let allchangedTag:any[]=[]
+    const parser = new DOMParser();
+    this.selectedEdit.Text.forEach((text)=>{
+      const parsedHTML = parser.parseFromString(text, 'text/html');
+      const mmrgPTag = parsedHTML.getElementById('mmrg');
+      if(mmrgPTag?.innerText.includes(',')){
+        mmrgPTag?.innerText.split(',').forEach((t)=>{
+          allchangedTag.push(t)
+        })
+      }
+      // mmrgPTag?.innerText.split(' ').forEach((e)=>{
+      //   allchangedTag.push(e)
+      // })
+    })
 
-let resultantTags=this.removeDuplicates(filteredtags.concat(questiontags)).join(',')
+    console.log(this.removeDuplicates(allchangedTag))
+
+    let  j=this.removeDuplicates(allchangedTag)
+
+    let filteredtags=arrtags[0].split(',').filter(e=>!j.includes(e))
+let resultantTags=this.removeDuplicates(filteredtags.concat(j)).join(',')
     this.selectedEdit.questions[0]=resultantTags
+    // console.log("withoutdupl")
+    // console.log(arrtags[0].split(','))
+    // console.log(filteredtags)
+    // console.log(j)
+
+
     //let mergedArray = Array.from(new Set([...array1, ...array2]));
 
 
@@ -543,8 +570,7 @@ let resultantTags=this.removeDuplicates(filteredtags.concat(questiontags)).join(
 
 
   completeEditsubmit(){
-    // console.log('this.is a final submit')
-    // console.log(this.selectedEdit)
+
     let index=this.allArtclesdocs[0]['Articledata'].findIndex(e=>e.topicName==this.selectedEdit.topicName)
     if(index>-1){
       this.allArtclesdocs[0]['Articledata'][index]=this.selectedEdit;
@@ -570,19 +596,22 @@ let resultantTags=this.removeDuplicates(filteredtags.concat(questiontags)).join(
 
   savetagnewTags(selectedData){
     let alltags= this.allArtclesdocs[5]['Tags'].map(t=>t.tag)
+    let filtertags=this.allArtclesdocs[5]['Tags'].filter(e=>e.doc!=selectedData.topicName)
+    let changedquestionTags=selectedData.questions[0].split(',')
    // this.allArtclesdocs[5]['Tags']=this.allArtclesdocs[5]['Tags'].filter(e=>e.doc!=selectedData.topicName)
     const updatedTags = this.changedTags.filter(e=>!alltags.includes(e))
-    console.log(updatedTags)
-    console.log(this.removeDuplicates(updatedTags))
-    updatedTags.forEach((tag)=>{
+    console.log(changedquestionTags)
+    console.log(filtertags)
+
+    changedquestionTags.forEach((tag)=>{
       let obj={
         doc:selectedData.topicName,
         tag:tag
       }
-      this.allArtclesdocs[5]['Tags'].push(obj)
+      filtertags.push(obj)
     })
       let d = {
-        Tags: this.allArtclesdocs[5]['Tags']
+        Tags: filtertags
       };
       this.afs.collection('articles').doc('tags').set(d, { merge: true }).then(()=>{
         this.changedTags = [];
