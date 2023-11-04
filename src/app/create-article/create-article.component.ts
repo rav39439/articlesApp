@@ -520,8 +520,12 @@ this.paragraphTags=[]
       questiontags=this.selectedEdit.questions[0].split(',')
 
     }
+    else if(this.selectedEdit.questions[0].includes('|')){
+    questiontags=this.selectedEdit.questions[0].split('|')
+
+    }
     else{
-    questiontags=this.selectedEdit.questions[0].split(' ')
+      questiontags=this.selectedEdit.questions[0].split(' ')
 
     }
     let filteredtags=arrtags.filter(e=>!questiontags.includes(e))
@@ -566,7 +570,10 @@ let resultantTags=this.removeDuplicates(filteredtags.concat(questiontags)).join(
 
   savetagnewTags(selectedData){
     let alltags= this.allArtclesdocs[5]['Tags'].map(t=>t.tag)
+   // this.allArtclesdocs[5]['Tags']=this.allArtclesdocs[5]['Tags'].filter(e=>e.doc!=selectedData.topicName)
     const updatedTags = this.changedTags.filter(e=>!alltags.includes(e))
+    console.log(updatedTags)
+    console.log(this.removeDuplicates(updatedTags))
     updatedTags.forEach((tag)=>{
       let obj={
         doc:selectedData.topicName,
