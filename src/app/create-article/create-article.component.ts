@@ -427,6 +427,7 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
   addtagsTopage() {
     let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
     this.questions[Page - 1] = this.tags.join(',');
+
     // this.tags = [];
 
   }
@@ -439,7 +440,15 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
       document.getElementById('topicdetails') as HTMLInputElement
     ).value;
     // let valNo:any= (document.getElementById('paraNo') as HTMLInputElement).value
-    this.paragraphTags.push(topicdetails)
+    if(topicdetails.includes('|')){
+      topicdetails.split('|').forEach((e)=>{
+        this.paragraphTags.push(e)
+      })
+    }
+    else{
+      this.paragraphTags.push(topicdetails)
+
+    }
     let stringgen=this.paragraphTags.join(',')
     let html=`<p id=mmrg style="display: none;">${stringgen}</p>`
     this.addText.push(formattedText+html)
@@ -477,8 +486,12 @@ this.paragraphTags=[]
 
   addtagstopara(){
    let val= (document.getElementById('tags') as HTMLInputElement).value
-   this.paragraphTags.push(val)
-   this.tags.push(val)
+  //  this.paragraphTags.push(val)
+  //  this.tags.push(val)
+  val.split(' ').forEach((e)=>{
+    this.paragraphTags.push(e)
+    this.tags.push(e)
+  })
   }
 
   submitEdit(){
