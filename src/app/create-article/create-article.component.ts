@@ -18,6 +18,7 @@ import {
   DocumentChangeAction,
 } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment.prod';
+
 import { finalize, firstValueFrom, merge } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -427,9 +428,6 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
   addtagsTopage() {
     let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
     this.questions[Page - 1] = this.tags.join(',');
-
-    // this.tags = [];
-
   }
 
   addExtraText(){
@@ -596,7 +594,6 @@ let resultantTags=this.removeDuplicates(filteredtags.concat(j)).join(',')
     let data1 = {
       Articledata: this.allArtclesdocs[0]['Articledata'],
     };
-    console.log(data1);
     this.afs
       .collection('articles')
       .doc('AIcollection')
@@ -613,8 +610,8 @@ let resultantTags=this.removeDuplicates(filteredtags.concat(j)).join(',')
     let changedquestionTags=selectedData.questions[0].split(',')
    // this.allArtclesdocs[5]['Tags']=this.allArtclesdocs[5]['Tags'].filter(e=>e.doc!=selectedData.topicName)
     const updatedTags = this.changedTags.filter(e=>!alltags.includes(e))
-    console.log(changedquestionTags)
-    console.log(filtertags)
+    // console.log(changedquestionTags)
+    // console.log(filtertags)
 
     changedquestionTags.forEach((tag)=>{
       let obj={

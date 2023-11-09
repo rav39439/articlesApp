@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "thinktac-em-game",
     "public": "dist/electromagnet",
     "ignore": [
       "firebase.json",
