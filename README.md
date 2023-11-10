@@ -1,7 +1,7 @@
 Production Commands:
 `ng build --configuration production --aot`
 
-`firebase deploy --only hosting:thinktac-em-game`
+`firebase deploy`
 
 Development Commands:
 `before deploy run below command`

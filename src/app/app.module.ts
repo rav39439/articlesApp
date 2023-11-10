@@ -6,7 +6,7 @@ import { RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { Route } from '@angular/router';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import {MatButtonModule} from '@angular/material/button';
 
 import { AngularFireModule } from '@angular/fire/compat';

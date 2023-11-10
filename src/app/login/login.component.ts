@@ -1,7 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { getAuth, RecaptchaVerifier } from "firebase/auth";
 import { initializeApp } from 'firebase/app';
 import { AuthServiceFirestore } from '../core/auth/authUser/auth-service.firestore';
