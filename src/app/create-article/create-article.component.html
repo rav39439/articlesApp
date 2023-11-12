@@ -1,4 +1,4 @@
-<div class="container " style="width: 80%;  margin-bottom:40px; border-radius:12px;">
+<div class="changeUI">
     <div class="p-4"
         style="border: 2px solid rgb(169, 169, 199); background-color: rgb(230, 230, 250);border-radius:16px;">
         <h2>Create Your Content</h2>
@@ -49,15 +49,7 @@
         <button class="btn btn-primary" style=" border-radius:17px;" (click)="addtagsTopage()">submit tags</button>
     </div>
 
-    <!-- <label for="tag priority"
-    style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Select
-    priority of a tag</label>
-<select name="priority" style=" border-radius:10px;" id="priority" class="form-control">
-    <option value="default" selected>---select priority of tag----</option>
-    <option value="high">High</option>
-    <option value="low">Low</option>
 
-</select> -->
       </div>
 
 
@@ -67,16 +59,13 @@
             Add tags to this paragraph</label>
         <input type="text" style=" border-radius:10px;" id="tags" class="form-control"
             aria-describedby="basic-addon2">
-            <!-- <input type="number" style=" border-radius:10px; margin-top: 10px;" id="paraNo" class="form-control"
-            aria-describedby="basic-addon2"> -->
+
     </div>
     <div class="mt-2 mb-2" style="display:flex;flex-direction: row;">
       <div class="form-group">
         <button class="btn btn-primary" style=" border-radius:17px;" (click)="addtagstopara()">Add tags to para</button>
     </div>
-    <!-- <div class="form-group">
-      <button class="btn btn-primary" style=" border-radius:17px;" (click)="submitTagstopara()">submit tags to para</button>
-  </div> -->
+
     </div>
 
 
@@ -119,7 +108,6 @@
                 the Content for Your article</label>
             <textarea id="mytextarea" placeholder="Enter note" name="note" class="form-control" rows="10"
                 style="height: 500px; width:100%; border-radius:17px;"></textarea>
-            <!-- <editor apiKey="nbk38rosoj3fg0fs00sm4hdwvt18xu7ozdfixqrxyvxunq23" [init]="tinyMceConfig"></editor> -->
 
 
         </div><br>
@@ -142,9 +130,6 @@
     <button class="btn btn-primary" style=" border-radius:17px;" (click)="completeEditsubmit()">completeeditsubmit</button>
 </div><br>
 
-        <!-- <div class="form-group">
-          <button class="btn btn-primary" style=" border-radius:17px;" (click)="savetagList("")">SaveForref</button>
-      </div><br> -->
     </div>
 
     <div class="form-group mt-3" style="border: 1px solid rgb(87, 74, 74); margin-bottom: 20px; border-radius:16px;">
@@ -160,10 +145,7 @@
             <button class="btn btn-primary" style=" border-radius:17px;" (click)="uploadImage()">Insert
                 Image</button>
 
-            <!-- <form action="/upload" method="post" id="image-form" enctype="multipart/form-data">
-                    <input type="file" name="file" id="fileInput" accept=".jpg, .jpeg, .png">
-                    <button type="submit">Upload</button>
-                  </form> -->
+
         </div>
     </div>
 </div>
@@ -180,6 +162,9 @@
 
 </div>
 <div id="jj" style="display: none;"></div>
+
+            <!-- <editor apiKey="nbk38rosoj3fg0fs00sm4hdwvt18xu7ozdfixqrxyvxunq23" [init]="tinyMceConfig"></editor> -->
+
 
 
 

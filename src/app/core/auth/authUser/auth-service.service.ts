@@ -49,11 +49,11 @@ export class AuthServiceService {
 
   setUser(user,phone) {
     //if (user) {
-      if(phone=='+917026912304'){
+      if(phone=='rav39439@gmail.com'){
         localStorage.setItem('user',user);
 
       }
-      
+
      this._router.navigateByUrl('/createArticle');
     // } else {
     //   this._router.navigate)
@@ -65,6 +65,7 @@ export class AuthServiceService {
     if (user!=null) {
 
       return true
+      // this._router.navigateByUrl('/create')
     }
     else {
       return false

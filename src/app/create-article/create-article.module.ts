@@ -5,13 +5,15 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 
 
 export const articlesRoutes: Route[] = [
   {
       path: '',
-      title: 'registration',
+      title: 'create Article',
       component: CreateArticleComponent
   }
 
@@ -23,8 +25,10 @@ export const articlesRoutes: Route[] = [
   ],
   imports: [
     CommonModule,
+    AngularFireModule,
     EditorModule,
     MatToolbarModule,
+    AngularFireStorageModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(articlesRoutes)

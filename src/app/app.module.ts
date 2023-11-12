@@ -22,53 +22,32 @@ import { AuthGuard } from './auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './logout/logout.component';
 import { LoginComponent } from './login/login.component';
+import { CreateArticleComponent } from './create-article/create-article.component';
 
-export const mainRoutes: Route[] = [
-  {
-    path: 'createArticle',
-    canActivate: [AuthGuard],
-   loadChildren: () => import('./create-article/create-article.module').then(m => m.CreateArticleModule),
-  },
-  // {
-  //  path: 'game-registration',
-  //  loadChildren: () => import('./game-registration/game-registration.module').then(m => m.GameRegistrationModule)
-  // },
-  {
-    path:'logout',
-   component:LogoutComponent,
-    // canActivate: [AuthGuard]
 
-  },
-
-   {
-    path:'',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
-  },
-
-];
 // AngularFireModule.initializeApp(environment.firebase),
 //     AngularFireFunctionsModule,
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AngularFireModule,
     MatFormFieldModule,
     MatButtonModule,
-    AngularFireStorageModule,
     BrowserModule,
     EditorModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    AngularFireStorageModule,
+    AngularFireModule,
+
     AngularFireModule.initializeApp(environment.firebase),
 
-    RouterModule.forRoot(mainRoutes),
+    // RouterModule.forRoot(mainRoutes),
     MatToolbarModule,
     AngularFireFunctionsModule,
   ],

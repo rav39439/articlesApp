@@ -1,26 +1,20 @@
-/// <reference types="tinymce" />
 import { Component, OnInit ,AfterViewInit} from '@angular/core';
 declare var tinymce: any; // Declare the TinyMCE variable
 
 // import * as firebase from 'firebase/app';
 // import firebase from 'firebase/app';
 import { initializeApp } from 'firebase/app';
-import 'firebase/storage';
-import 'firebase/database';
-import 'firebase/firestore';
-import 'tinymce/tinymce';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+//import 'tinymce/tinymce';
+// import { AngularFireStorage } from '@angular/fire/compat/storage';
 
-import { AngularFireModule } from '@angular/fire/compat';
 import {
   AngularFirestore,
-  AngularFirestoreModule,
   DocumentChangeAction,
 } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment.prod';
 
-import { finalize, firstValueFrom, merge } from 'rxjs';
 import { Router } from '@angular/router';
+// <reference types="tinymce" />
 
 
 
@@ -29,7 +23,7 @@ import { Router } from '@angular/router';
   templateUrl: './create-article.component.html',
   styleUrls: ['./create-article.component.scss'],
 })
-export class CreateArticleComponent implements OnInit , AfterViewInit {
+export class CreateArticleComponent  {
   currentTime = Date.now();
   allrr: any = [];
   paragraphTags:any[]=[]
@@ -57,11 +51,11 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
       'undo redo | formatselect | bold italic | alignleft aligncenter alignright | code',
   };
   constructor(
-    private firestore: AngularFireStorage,
-    protected afs: AngularFirestore,
+    // private firestore: AngularFireStorage,
+     public afs: AngularFirestore,
     private router: Router
   ) {
-    initializeApp(environment.firebase);
+     initializeApp(environment.firebase);
   }
   ngAfterViewInit(): void {
     //this.editorContent = tinymce.editor.getContent();
@@ -85,11 +79,7 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
         respondWith.string(() =>
           Promise.reject('See docs to implement AI Assistant')
         ),
-    });
-    //     const upRef = (document.getElementById('AI') as HTMLSelectElement).value;
-    // console.log(upRef)
-    // console.log(await this.getAIdata())
-    // throw new Error('Method not implemented.');
+   });
   }
 
   saveText() {
@@ -113,7 +103,7 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
 
     const result = await this.inspectDocuments(topic);
 
-    const db = this.firestore;
+    // const db = this.firestore;
     const collectionRef = this.afs.collection('articles').doc(subject);
     const formattedText = data.replace(/\n \+/g, '<br>');
     const question = (document.getElementById('question') as HTMLInputElement)
@@ -282,7 +272,7 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
   }
 
   async getAllArticlesdocs() {
-    const db = this.firestore;
+    // const db = this.firestore;
     const collectionRef = await this.afs
       .collection('articles')
       .snapshotChanges();
@@ -333,26 +323,26 @@ export class CreateArticleComponent implements OnInit , AfterViewInit {
   }
 
   saveImageData(file: File) {
-    const filename = (document.getElementById('filename') as HTMLInputElement)
-      .value;
-    const storageRef = this.firestore.ref('images/' + filename);
-    const uploadTask = storageRef.put(file);
-    uploadTask
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          storageRef.getDownloadURL().subscribe(
-            (downloadURL) => {
-              console.log('Image uploaded successfully:', downloadURL);
-              this.saveImageURLToDatabase(downloadURL, filename);
-            },
-            (error) => {
-              console.error('Error getting download URL:', error);
-            }
-          );
-        })
-      )
-      .subscribe();
+    // const filename = (document.getElementById('filename') as HTMLInputElement)
+    //   .value;
+    // const storageRef = this.firestore.ref('images/' + filename);
+    // const uploadTask = storageRef.put(file);
+    // uploadTask
+    //   .snapshotChanges()
+    //   .pipe(
+    //     finalize(() => {
+    //       storageRef.getDownloadURL().subscribe(
+    //         (downloadURL) => {
+    //           console.log('Image uploaded successfully:', downloadURL);
+    //           this.saveImageURLToDatabase(downloadURL, filename);
+    //         },
+    //         (error) => {
+    //           console.error('Error getting download URL:', error);
+    //         }
+    //       );
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   saveImageURLToDatabase(downloadURL: string, name: string) {
@@ -457,7 +447,6 @@ this.paragraphTags=[]
   EditInAI(){
     let index
     let selectelm
-    // index=this.allArtclesdocs[0].Articledata.findIndex(e=>e.topicName==topic)
     const topic = (document.getElementById('topic') as HTMLInputElement).value;
     let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
     let texthtml: any = (document.getElementById('jj') as HTMLElement);
@@ -552,33 +541,14 @@ let allchangedTag:any[]=[]
           allchangedTag.push(t)
         })
       }
-      // mmrgPTag?.innerText.split(' ').forEach((e)=>{
-      //   allchangedTag.push(e)
-      // })
     })
-
-    console.log(this.removeDuplicates(allchangedTag))
-
     let  j=this.removeDuplicates(allchangedTag)
-
     let filteredtags=arrtags[0].split(',').filter(e=>!j.includes(e))
 let resultantTags=this.removeDuplicates(filteredtags.concat(j)).join(',')
     this.selectedEdit.questions[0]=resultantTags
-    // console.log("withoutdupl")
-    // console.log(arrtags[0].split(','))
-    // console.log(filteredtags)
-    // console.log(j)
-
-
-    //let mergedArray = Array.from(new Set([...array1, ...array2]));
-
-
     this.selectedEdit.Text[Page-1]=texthtml.innerHTML+html
     this.paragraphTags=[]
-
   }
-
-
 
   completeEditsubmit(){
 

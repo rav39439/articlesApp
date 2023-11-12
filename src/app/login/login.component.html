@@ -2,24 +2,14 @@
     <div
         class="my-auto md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-4 sm:p-12 md:p-16 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none sm:bg-card">
         <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
-            <!-- Logo -->
-            <!-- <h1>Create Your Material</h1> -->
+
             <div class="w-150 sm:w-50 mx-auto">
                 <img class="mx-auto" src="../../assets/istockphoto-1468477683-1024x1024.jpg" width="400px">
             </div>
 
-            <!-- Title -->
             <div class="mt-8 text-center text-4xl text-accent-600 font-extrabold tracking-tight leading-tight">Sign in
             </div>
-            <!-- <div class="flex items-baseline mt-0.5 font-medium text-accent-600">
-                <div>Don't have an account?</div>
-                <a class="ml-1 text-primary-500 hover:underline" [routerLink]="['/sign-up']">Sign up
-                </a>
-            </div> -->
 
-            <!-- Phone field -->
-
-            
             <div class="mt-2 w-full text-accent-600 text-center ">
                 <mat-label class="text-accent-600 text-center ">Phone number</mat-label>
                 <div class="d-flex">
@@ -30,23 +20,19 @@
                 </div>
             </div>
 
-            <!-- For recaptcha -->
             <div class="mb-1" id="recaptcha-container" [hidden]="captchaHide">
             </div>
 
-            <!-- For captcha verification -->
             <div class="mb-1" [hidden]="sendOTPBtnHide">
                 <div class="mb2 d-flex">
                     <span>
                         <input type="checkbox" [(ngModel)]="consentInput">
                         <small class="text-muted"> By proceeding, I agree to
-                            receive notification and communication emails, SMSs, WhatsApp and Telegram messages from
-                            Raman Awards
-                            and ThinkTac. You may withdraw your consent at any time.</small>
+                            receive notification and communication emails, SMSs, WhatsApp and Telegram messages
+                           . You may withdraw your consent at any time.</small>
                     </span>
                 </div>
 
-                <!-- Send OTP button -->
                 <button class="fuse-mat-button-large w-full mt-6" mat-flat-button [color]="'primary'"
                     [disabled]="sendOTPBtnTimeDisabled || !consentInput"
                     title="{{sendOTPBtnTimeDisabled?'If you do not receive OTP, click on Resend OTP button after 30 seconds':''}}"
@@ -55,8 +41,7 @@
                 </button>
             </div>
 
-            <!-- OTP field -->
-            <div *ngIf="windowRef?.confirmationResult" [hidden]="hideVerification" class="mt-6">
+            <div  [hidden]="hideVerification" class="mt-6">
                 <div class="w-full text-accent-600">
                     <mat-label class="text-accent-600">Enter your Verification Code</mat-label>
                     <input id="otp" matInput type="otp" type="text" name="code" [(ngModel)]="verificationCode">
@@ -65,7 +50,6 @@
                     </mat-error>
                 </div>
 
-                <!-- Login btn -->
                 <button class="mt-1 fuse-mat-button-large w-full" mat-flat-button [color]="'primary'"
                     (click)="verifyLoginCode()" [disabled]="disableLoginBtn">Login
                 </button>
@@ -76,5 +60,7 @@
             </div>
         </div>
     </div>
-   
+
 </div>
+
+

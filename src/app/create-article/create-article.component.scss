@@ -3,3 +3,19 @@
     border: 1px;
     height: 100%;
   }
+
+.changeUI{
+  width: 80%;
+  //  margin-bottom:40px;
+  //  margin-right: 160px;
+  //   border-radius:12px;
+  margin-left: 100px;
+}
+
+  @media only screen and (max-width: 502px) {
+    .changeUI {
+       width: 95%;
+       margin-left: 0px;
+    }
+
+}
