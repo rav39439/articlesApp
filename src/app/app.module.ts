@@ -13,11 +13,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { LoginComponent } from './login/login.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
+import { SearchQueriesComponent } from './search-queries/search-queries.component';
 
 @NgModule({
   declarations: [
     AppComponent,
- CreateArticleComponent
+ CreateArticleComponent,
+ SearchQueriesComponent
   ],
   imports: [
     BrowserModule,

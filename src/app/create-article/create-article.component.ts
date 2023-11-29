@@ -274,7 +274,6 @@ export class CreateArticleComponent {
   }
 
   async getAllArticlesdocs() {
-    // const db = this.firestore;
     const collectionRef = await this.afs
       .collection('articles')
       .snapshotChanges();
@@ -290,9 +289,6 @@ export class CreateArticleComponent {
         this.sub.push(sub);
       }
     );
-    //  setTimeout(()=>{
-    //   console.log(this.allArtclesdocs)
-    //  },7000)
   }
 
   async inspectDocuments(topic: string) {

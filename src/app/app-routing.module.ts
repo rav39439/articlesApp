@@ -10,10 +10,10 @@ const routes: Routes = [
    //loadChildren: () => import('./create-article/create-article.module').then(m => m.CreateArticleModule),
 
   },
-  // {
-  //  path: 'game-registration',
-  //  loadChildren: () => import('./game-registration/game-registration.module').then(m => m.GameRegistrationModule)
-  // },
+  {
+   path: 'search-queries',
+   loadChildren: () => import('./search-queries/search-queries.module').then(m => m.SearchQueriesModule)
+  },
   // {
   //   path:'logout',
   //  component:LogoutComponent,
