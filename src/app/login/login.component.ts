@@ -148,6 +148,7 @@ if(this.phoneNumber=='7026912304'){
       localStorage.setItem('user', JSON.stringify(n));
       setTimeout(()=>{
         this.router.navigateByUrl('/createArticle');
+      
 
       },2000)
     }
