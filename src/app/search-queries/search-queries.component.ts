@@ -101,7 +101,7 @@ export class SearchQueriesComponent implements OnInit {
                 if (doc != null) {
                     let value = this.getExactAnsFromtext(doc, tagsTosearch, html1, finalDocs)[0]
                     let val = finalDocs
-                    // console.log(val)
+                     console.log(val)
 
                     if (typeof (val) != 'undefined') {
                         if (val.length != 0) {
@@ -113,8 +113,8 @@ export class SearchQueriesComponent implements OnInit {
                                 html = finalDocs[nindex].html
                             }
                             else {
-                                // console.log('finaldocs')
-                                // console.log(finalDocs)
+                                console.log('finaldocs')
+                                console.log(finalDocs)
                                 if(val[0]){
                                     html = val[0].html
 
@@ -193,10 +193,10 @@ export class SearchQueriesComponent implements OnInit {
             let value1 = this.ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
             let value2 = this.ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc, definedDocs)
             //   console.log('final')
-            //   console.log(value1)
+            //    console.log(value1)
 
             //   console.log(value2)
-            // console.log(definedDocs)
+             console.log(definedDocs)
             if (typeof (value2) != 'undefined' && value1 !== null && value2 !== null &&
                 typeof (value1) != 'undefined') {
                 if (value1 != value2) {
@@ -237,11 +237,13 @@ export class SearchQueriesComponent implements OnInit {
 
                         if (c1 == c2) {
                             html1.push(value1)
+                            finalDocs.push({html:value1,pmatch:100})
+
                         }
                         else if (c1 > c2) {
 
                             html1.push(value1)
-                            finalDocs.push(value1)
+                            finalDocs.push({html:value1,pmatch:100})
                         }
                         else {
                             html1.push(value2)
@@ -254,7 +256,7 @@ export class SearchQueriesComponent implements OnInit {
                 }
                 else {
                     html1.push()
-                    finalDocs.push(value1)
+                    finalDocs.push({html:value1,pmatch:100})
 
                 }
             }
@@ -262,7 +264,7 @@ export class SearchQueriesComponent implements OnInit {
             else if ((typeof (value1) == 'string')
                 && (typeof (value2) == 'undefined')) {
                 html1.push(value1)
-                finalDocs.push(value1)
+                finalDocs.push({html:value1,pmatch:100})
             }
 
             else if (typeof (value2) == 'string' && typeof (value1) == 'undefined') {
@@ -371,18 +373,33 @@ export class SearchQueriesComponent implements OnInit {
             }
         }
         let ncount = counts.map(e => e.tagscount)
+
         let b = Math.max(...ncount)
         let index = ncount.findIndex(e => e == b)
+        let da=counts.filter(e=>e.tagscount==b)
+      let percentageelems=da.map(ele=>ele.percentmatch)
+      let bw = Math.max(...percentageelems)
+    //   console.log(bw)
+
+      let newindex=counts.findIndex(elem=>elem.percentmatch==bw)
+    //   console.log(newindex)
+    //   console.log(counts[newindex])
+
+      if(newindex>-1){
+        index=newindex
+      }
         if (b > 0) {
             if (b < 4) {
+
                 if (counts[index].percentmatch > 45) {
+
                     this.text = htmlText[index]
                     definedDocs.push({ pmatch: counts[index].percentmatch, html: htmlText[index] })
 
                 }
             }
             else {
-                this.text = htmlText[index]
+                this.text = htmlText[newindex]
                 definedDocs.push({ pmatch: counts[index].percentmatch, html: htmlText[index] })
 
             }
@@ -394,7 +411,6 @@ export class SearchQueriesComponent implements OnInit {
         let allPercentages = definedDocs.map(e => e.pmatch)
         let maxval = Math.max(...allPercentages)
         let nindex = definedDocs.findIndex(e => e.pmatch == maxval)
-        //   console.log(definedDocs)
         //   console.log(allPercentages)
         //   console.log(maxval)
         //   console.log(nindex)
@@ -407,7 +423,7 @@ export class SearchQueriesComponent implements OnInit {
         else {
             ntext = ''
         }
-        countwithDoc.push({ count: b, docum: htmlText[index] })
+        countwithDoc.push({ count: b, docum: htmlText[newindex] })
 
 
         //console.log(this.text)
