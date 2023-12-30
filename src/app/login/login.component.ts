@@ -27,6 +27,7 @@ declare const window: any;
 export class LoginComponent implements OnInit {
   user;
   myAuth;
+  
   windowRef: any;
   phoneNumber: string = '';
   verificationCode: string;
@@ -64,8 +65,7 @@ export class LoginComponent implements OnInit {
 
     const auth = getAuth();
     this.myAuth = auth;
-    console.log(this.myAuth);
-    console.log(this.afAuth);
+
 
     this.getCaptchaWidgetId();
 

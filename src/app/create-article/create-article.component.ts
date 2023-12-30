@@ -36,6 +36,7 @@ export class CreateArticleComponent {
   tags: any = [];
   questions: any[] = [];
   allArtclesdocs: any = [];
+  paratagscopy:any[]=[]
   width: number;
   editorContent: string = ''; // Initial content for the editor
   sub: any = [];
@@ -65,27 +66,30 @@ export class CreateArticleComponent {
     this.getAllArticlesdocs();
     // const db = firebase.firestore();
 
-    tinymce.init({
-      selector: 'textarea',
-      plugins:
-        'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
-      toolbar:
-        'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-      tinycomments_mode: 'embedded',
-      tinycomments_author: 'Author name',
-      mergetags_list: [
-        { value: 'First.Name', title: 'First Name' },
-        { value: 'Email', title: 'Email' },
-      ],
-      ai_request: (request, respondWith) =>
-        respondWith.string(() =>
-          Promise.reject('See docs to implement AI Assistant')
-        ),
-   });
+  //   tinymce.init({
+  //     selector: 'textarea',
+  //     plugins:
+  //       'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+  //     toolbar:
+  //       'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+  //     tinycomments_mode: 'embedded',
+  //     tinycomments_author: 'Author name',
+  //     mergetags_list: [
+  //       { value: 'First.Name', title: 'First Name' },
+  //       { value: 'Email', title: 'Email' },
+  //     ],
+  //     ai_request: (request, respondWith) =>
+  //       respondWith.string(() =>
+  //         Promise.reject('See docs to implement AI Assistant')
+  //       ),
+  //  });
   }
 
   saveText() {
-    const text = tinymce.get('mytextarea').getContent();
+    let textbox=document.getElementById("mytextarea")as HTMLTextAreaElement
+    const text=textbox.value
+    // console.log(text)
+    // const text = tinymce.get('mytextarea').getContent();
     let p = document.getElementById('text-written') as HTMLElement;
     p.innerHTML = text;
     this.saveData(text);
@@ -108,8 +112,8 @@ export class CreateArticleComponent {
     // const db = this.firestore;
     const collectionRef = this.afs.collection('articles').doc(subject);
     const formattedText = data.replace(/\n \+/g, '<br>');
-    const question = (document.getElementById('question') as HTMLInputElement)
-    .value;
+    // const question = (document.getElementById('question') as HTMLInputElement)
+    // .value;
 
     let ntopic=topicdetails.split(' ')
     if(ntopic.length>1){
@@ -162,7 +166,7 @@ export class CreateArticleComponent {
         time: this.currentTime,
         topicName: topic,
         class: grade1,
-        questions: this.questions,
+       questions: this.questions,
       };
     } else {
       let b: any[] = [];
@@ -184,7 +188,7 @@ export class CreateArticleComponent {
         time: this.currentTime,
         topicName: topic,
         class: grade1,
-        questions: this.questions,
+       questions: this.questions,
       };
     }
     console.log("dataobkect1")
@@ -223,7 +227,7 @@ export class CreateArticleComponent {
       let data1 = {
         Articledata: this.allArtclesdocs[0]['Articledata'],
       };
-      console.log(data1);
+      // console.log(data1);
       this.afs
         .collection('articles')
         .doc('AIcollection')
@@ -394,11 +398,11 @@ export class CreateArticleComponent {
   }
 
   addQuestion() {
-    const question = (document.getElementById('question') as HTMLInputElement)
-      .value;
+    // const question = (document.getElementById('question') as HTMLInputElement)
+    //   .value;
     let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
-    this.tags.push(question);
-    this.questions[Page - 1] = question;
+   // this.tags.push(question);
+    //this.questions[Page - 1] = question;
   }
 
   Logout() {
@@ -419,7 +423,9 @@ export class CreateArticleComponent {
   }
 
   addExtraText(){
-    const text = tinymce.get('mytextarea').getContent();
+    //const text = tinymce.get('mytextarea').getContent();
+    let textbox=document.getElementById("mytextarea")as HTMLTextAreaElement
+    const text=textbox.value
     const formattedText = text.replace(/\n \+/g, '<br>');
     let topic = (document.getElementById('topic') as HTMLInputElement).value;
     const topicdetails = (
@@ -436,10 +442,18 @@ export class CreateArticleComponent {
 
     }
     let stringgen=this.paragraphTags.join(',')
+this.paratagscopy=this.paragraphTags
     let html=`<p id=mmrg style="display: none;">${stringgen}</p>`
+
     this.addText.push(formattedText+html)
+    console.log("add extra tesxt")
+    // console.log(html)
+    console.log( this.addText)
+    // console.log( formattedText)
+
+
     this.topicName=topic
-this.paragraphTags=[]
+
   }
 
   EditInAI(){
@@ -464,7 +478,9 @@ this.paragraphTags=[]
     if(typeof(document.getElementById('mmrg'))!=='undefined'&& document.getElementById('mmrg')!==null){
 
     ptag.style.display='block'
-    tinymce.get('mytextarea').setContent(texthtml.innerHTML);
+    let textbox=document.getElementById("mytextarea")as HTMLTextAreaElement
+    textbox.value=texthtml.innerHTML
+   // tinymce.get('mytextarea').setContent(texthtml.innerHTML);
     }
 
   }
@@ -491,7 +507,13 @@ this.paragraphTags=[]
     ).value;
     this.selectedEdit.Topicdetails=topicdetails
     let texthtml: any = (document.getElementById('jj') as HTMLElement);
-    texthtml.innerHTML=tinymce.get('mytextarea').getContent();
+    // texthtml.innerHTML=tinymce.get('mytextarea').getContent();
+    let textbox=document.getElementById("mytextarea")as HTMLTextAreaElement
+    const parser1 = new DOMParser()
+      const parsedHTML = parser1.parseFromString(textbox.value, 'text/html');
+      texthtml.innerHTML=textbox.value
+
+   console.log(document.getElementById('mmrg'))
     if(typeof(document.getElementById('mmrg'))!=='undefined'&& document.getElementById('mmrg')!==null){
         (document.getElementById('mmrg') as HTMLElement).style.display='none'
         ptag=(document.getElementById('mmrg') as HTMLElement).innerText
@@ -499,38 +521,52 @@ this.paragraphTags=[]
     this.changedTags=arrtags
     }
     else{
-      // if(topicdetails.includes('|')){
-      //   let d=topicdetails.split('|')
-      //   d.forEach((e)=>{
-      //     this.paragraphTags.push(e)
-      //   })
-      // }
-      // else{
-      //   this.paragraphTags.push(topicdetails)
-      // }
-
       let stringgen=this.paragraphTags.join(',')
       html=`<p id=mmrg style="display: none;">${stringgen}</p>`
-      arrtags=this.paragraphTags
+      arrtags=this.paratagscopy
+      console.log("submit edit")
+
+      console.log(html)
+      console.log(this.paragraphTags)
+
       this.changedTags=arrtags
 
     }
 
-    let questiontags
-    if(this.selectedEdit.questions[0].includes(',')){
-      questiontags=this.selectedEdit.questions[0].split(',')
+    let questiontags:any[]=[]
+    if(this.selectedEdit.questions){
+      if(this.selectedEdit.questions[0].includes(',')){
+        questiontags=this.selectedEdit.questions[0].split(',')
 
-    }
-    else if(this.selectedEdit.questions[0].includes('|')){
-    questiontags=this.selectedEdit.questions[0].split('|')
+      }
+      else if(this.selectedEdit.questions[0].includes('|')){
+      questiontags=this.selectedEdit.questions[0].split('|')
 
+      }
+      else{
+        questiontags=this.selectedEdit.questions[0].split(' ')
+
+      }
     }
     else{
-      questiontags=this.selectedEdit.questions[0].split(' ')
+      //this.selectedEdit['questions'][0]=this.paragraphTags
+      questiontags=this.paratagscopy
+      // if(this.selectedEdit.questions[0].includes(',')){
+      //   questiontags=this.selectedEdit.questions[0].split(',')
 
+      // }
+      // else if(this.selectedEdit.questions[0].includes('|')){
+      // questiontags=this.selectedEdit.questions[0].split('|')
+
+      // }
+      // else{
+      //   questiontags=this.selectedEdit.questions[0].split(' ')
+
+      // }
     }
+
 let allchangedTag:any[]=[]
-    const parser = new DOMParser();
+    const parser = new DOMParser()
     this.selectedEdit.Text.forEach((text)=>{
       const parsedHTML = parser.parseFromString(text, 'text/html');
       const mmrgPTag = parsedHTML.getElementById('mmrg');
@@ -543,7 +579,15 @@ let allchangedTag:any[]=[]
     let  j=this.removeDuplicates(allchangedTag)
     let filteredtags=arrtags[0].split(',').filter(e=>!j.includes(e))
 let resultantTags=this.removeDuplicates(filteredtags.concat(j)).join(',')
-    this.selectedEdit.questions[0]=resultantTags
+if(this.selectedEdit.questions){
+  this.selectedEdit.questions[0]=resultantTags
+
+}
+else{
+  let b:any[]=[]
+  b.push(resultantTags)
+  this.selectedEdit['questions']=resultantTags
+}
     this.selectedEdit.Text[Page-1]=texthtml.innerHTML+html
     this.paragraphTags=[]
   }
@@ -569,13 +613,27 @@ let resultantTags=this.removeDuplicates(filteredtags.concat(j)).join(',')
     this.savetagnewTags(
       this.selectedEdit
     );
+
+    this.paragraphTags=[]
+
   }
 
 
   savetagnewTags(selectedData){
     let alltags= this.allArtclesdocs[5]['Tags'].map(t=>t.tag)
     let filtertags=this.allArtclesdocs[5]['Tags'].filter(e=>e.doc!=selectedData.topicName)
-    let changedquestionTags=selectedData.questions[0].split(',')
+    let filtertags1=this.allArtclesdocs[5]['Tags'].filter(e=>e.doc==selectedData.topicName)
+
+    let changedquestionTags:any[]=[]
+    if(this.selectedEdit.questions){
+    changedquestionTags=selectedData.questions[0].split(',')
+
+    }
+    else{
+      changedquestionTags=filtertags1
+
+    }
+
    // this.allArtclesdocs[5]['Tags']=this.allArtclesdocs[5]['Tags'].filter(e=>e.doc!=selectedData.topicName)
     const updatedTags = this.changedTags.filter(e=>!alltags.includes(e))
     // console.log(changedquestionTags)
@@ -590,7 +648,7 @@ ntag=tag.split('[')[1]
         ntag=tag
       }
 
-      
+
       let obj={
         doc:selectedData.topicName,
         tag:ntag
