@@ -64,6 +64,7 @@ export class CreateArticleComponent {
   }
   async ngOnInit() {
     this.getAllArticlesdocs();
+
     // const db = firebase.firestore();
 
   //   tinymce.init({
@@ -446,12 +447,6 @@ this.paratagscopy=this.paragraphTags
     let html=`<p id=mmrg style="display: none;">${stringgen}</p>`
 
     this.addText.push(formattedText+html)
-    console.log("add extra tesxt")
-    // console.log(html)
-    console.log( this.addText)
-    // console.log( formattedText)
-
-
     this.topicName=topic
 
   }
@@ -513,7 +508,6 @@ this.paratagscopy=this.paragraphTags
       const parsedHTML = parser1.parseFromString(textbox.value, 'text/html');
       texthtml.innerHTML=textbox.value
 
-   console.log(document.getElementById('mmrg'))
     if(typeof(document.getElementById('mmrg'))!=='undefined'&& document.getElementById('mmrg')!==null){
         (document.getElementById('mmrg') as HTMLElement).style.display='none'
         ptag=(document.getElementById('mmrg') as HTMLElement).innerText
@@ -524,11 +518,6 @@ this.paratagscopy=this.paragraphTags
       let stringgen=this.paragraphTags.join(',')
       html=`<p id=mmrg style="display: none;">${stringgen}</p>`
       arrtags=this.paratagscopy
-      console.log("submit edit")
-
-      console.log(html)
-      console.log(this.paragraphTags)
-
       this.changedTags=arrtags
 
     }
