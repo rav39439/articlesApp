@@ -59,12 +59,32 @@ export class CreateArticleComponent {
      initializeApp(environment.firebase);
   }
   ngAfterViewInit(): void {
+    let p:any=localStorage.getItem('user')
+    let user:any=JSON.parse(p)
+    if(user.phoneNumber=='+917026912304' && user!=null){
+      console.log('user logged in')
+    }
+    else{
+      this.router.navigateByUrl('/')
+    }
     //this.editorContent = tinymce.editor.getContent();
 
   }
   async ngOnInit() {
     this.getAllArticlesdocs();
+    let p:any=localStorage.getItem('user')
+    let user:any=JSON.parse(p)
+if(user!=null){
+    if(user.phoneNumber=='+917026912304'){
+      console.log('user logged in')
+    }
+    else{
+      this.router.navigateByUrl('/')
+    }
+  }else{
+    this.router.navigateByUrl('/')
 
+  }
     // const db = firebase.firestore();
 
   //   tinymce.init({
@@ -407,7 +427,9 @@ export class CreateArticleComponent {
   }
 
   Logout() {
-    this.router.navigateByUrl('/logout');
+    localStorage.removeItem('user')
+   // window.location.reload()
+  this.router.navigateByUrl('/');
   }
 
   checkCheckboxState() {

@@ -14,12 +14,16 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { LoginComponent } from './login/login.component';
 import { CreateArticleComponent } from './create-article/create-article.component';
 import { SearchQueriesComponent } from './search-queries/search-queries.component';
+import { WriteBookComponent } from './write-book/write-book.component';
+import { PortFolioUserComponent } from './port-folio-user/port-folio-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
  CreateArticleComponent,
- SearchQueriesComponent
+ SearchQueriesComponent,
+ WriteBookComponent,
+ PortFolioUserComponent
   ],
   imports: [
     BrowserModule,

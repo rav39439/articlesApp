@@ -27,7 +27,7 @@ declare const window: any;
 export class LoginComponent implements OnInit {
   user;
   myAuth;
-  
+
   windowRef: any;
   phoneNumber: string = '';
   verificationCode: string;
@@ -87,45 +87,68 @@ export class LoginComponent implements OnInit {
   }
 
   getCaptchaWidgetId() {
-    // this.ngZone.run(() => {
-    //   const auth = getAuth();
+    this.ngZone.run(() => {
+      const auth = getAuth();
 
-    //   this.windowRef = this.getWindow;
-    //   this.windowRef.recaptchaVerifier = new RecaptchaVerifier(
-    //     'recaptcha-container',
-    //     {
-    //       size: 'visible',
-    //       callback: () => {
-    //         this.ngZone.run(() => {
-    //           this.captchaHide = true;
+      this.windowRef = this.getWindow;
+   //   this.windowRef.recaptchaVerifier=new RecaptchaVerifier(auth,'recaptcha-container')
+      this.windowRef.recaptchaVerifier = new RecaptchaVerifier(auth,
+        'recaptcha-container',
+        {
+          size: 'visible',
+          callback: () => {
+            this.ngZone.run(() => {
+              this.captchaHide = true;
                this.sendOTPBtnHide = false;
-    //         });
-    //       },
-    //       'expired-callback': () => {
-    //         console.error('Expired');
-    //         this.captchaHide = false;
-    //         // Response expired. Ask user to solve reCAPTCHA again.
-    //         // ...
-    //       },
-    //     },
-    //     auth
-    //   );
-    //   this.windowRef.recaptchaVerifier.render().then((widgetId) => {
-    //     this.windowRef.recaptchaWidgetId = widgetId;
-    //   });
-    // });
+            });
+          },
+          'expired-callback': () => {
+            console.error('Expired');
+            this.captchaHide = false;
+            // Response expired. Ask user to solve reCAPTCHA again.
+            // ...
+          },
+        },
+
+      );
+      this.windowRef.recaptchaVerifier.render().then((widgetId) => {
+        this.windowRef.recaptchaWidgetId = widgetId;
+      });
+    });
   }
 
   async sendLoginCode() {
+
     this.invalidOTP = false;
     this.sendOTPBtnTimeDisabled = true;
-    // const appVerifier = this.windowRef.recaptchaVerifier;
-    const num = '+91' + this.phoneNumber;
-if(this.phoneNumber=='7026912304'){
-        this.hideVerification = false;
-        // this.windowRef?.confirmationResult---------Add
+    const appVerifier = this.windowRef.recaptchaVerifier;
+    const num ='+91'+this.phoneNumber;
+    (await this.afAuth.settings).appVerificationDisabledForTesting = true;
+    if(this.phoneNumber=='7026912304'){
+    this.afAuth
+        .signInWithPhoneNumber(num, appVerifier)
+        .then((result:any) => {
+            this.windowRef.confirmationResult = result;
+            this.hideVerification = false;
+            this.resendOTPBtnHide = false;
+            // console.log(result.user.phoneNumber)
+            setTimeout(() => {
+                this.sendOTPBtnTimeDisabled = false;
+            }, 5000 * 6);
+        })
+        .catch(error => console.log(error))
+      }else{
+        alert("Phone number not allowed")
+      }
+//     this.invalidOTP = false;
+//     this.sendOTPBtnTimeDisabled = true;
+//    const appVerifier = this.windowRef.recaptchaVerifier;
+//     const num = '+91' + this.phoneNumber;
+// if(this.phoneNumber=='7026912304'){
+//         this.hideVerification = false;
+//         // this.windowRef?.confirmationResult---------Add
 
-}
+// }
     // signInWithPhoneNumber(this.myAuth, num, appVerifier)
     //   .then((result: any) => {
     //     this.windowRef.confirmationResult = result;
@@ -140,37 +163,37 @@ if(this.phoneNumber=='7026912304'){
 
   verifyLoginCode() {
     this.disableLoginBtn = true;
-    if(this.verificationCode=='ravrav678#'){
-      let n={
-        name:"BoT",
-        RegNo:'88893874'
-      }
-      localStorage.setItem('user', JSON.stringify(n));
-      setTimeout(()=>{
-        this.router.navigateByUrl('/createArticle');
-      
+    // if(this.verificationCode=='ravrav678#'){
+    //   let n={
+    //     name:"BoT",
+    //     RegNo:'88893874'
+    //   }
+    //   localStorage.setItem('user', JSON.stringify(n));
+    //   setTimeout(()=>{
+    //     this.router.navigateByUrl('/createArticle');
 
-      },2000)
-    }
-    // this.windowRef.confirmationResult
-    //   .confirm(this.verificationCode)
-    //   .then(async (result) => {
-    //     this.user = result.user;
 
-    //     if (this.phoneNumber =='7026912304') {
-    //       localStorage.setItem('user', result.user);
-    //       this.router.navigateByUrl('/createArticle');
-    //     }
-    //     this.disableLoginBtn = false;
-    //     this.disableLoginBtn = false;
-    //   })
-    //   .catch((error) => {
-    //     console.error(error.message);
-    //     if (error.code === 'auth/invalid-verification-code') {
-    //       this.invalidOTP = true;
-    //     }
-    //     this.disableLoginBtn = false;
-    //   });
+    //   },2000)
+    // }
+    this.windowRef.confirmationResult
+      .confirm(this.verificationCode)
+      .then(async (result) => {
+        this.user = result.user;
+
+        if (this.phoneNumber =='7026912304') {
+          localStorage.setItem('user', JSON.stringify(result.user));
+          this.router.navigateByUrl('/createArticle');
+        }
+        this.disableLoginBtn = false;
+        this.disableLoginBtn = false;
+      })
+      .catch((error) => {
+        console.error(error.message);
+        if (error.code === 'auth/invalid-verification-code') {
+          this.invalidOTP = true;
+        }
+        this.disableLoginBtn = false;
+      });
   }
   getWindow() {
     return window;

@@ -113,15 +113,15 @@ export class SearchQueriesComponent implements OnInit {
                                 html = finalDocs[nindex].html
                             }
                             else {
-                                console.log('finaldocs')
-                                console.log(finalDocs)
+                                // console.log('finaldocs')
+                                // console.log(finalDocs)
                                 if(val[0]){
                                     html = val[0].html
 
                                 }
                                 else{
                                     html = '`<h1> Not found </h1>`'
- 
+
                                 }
                             }
                         }
@@ -141,7 +141,7 @@ export class SearchQueriesComponent implements OnInit {
             })
         }
 
-
+        console.log(html)
 
         if (html.length != 0) {
             let s3 = document.getElementById('dd') as HTMLElement
@@ -155,6 +155,8 @@ export class SearchQueriesComponent implements OnInit {
         }
 
         let updatedHtml = this.getHTMLTags()
+        console.log(updatedHtml)
+
         this.settext(updatedHtml)
         this.text = undefined
     }
@@ -551,6 +553,7 @@ export class SearchQueriesComponent implements OnInit {
                         pTagsArray.push(newText + ' ');
                     })
                 }
+
                 else if (tag.nodeName.toLowerCase() === 'h1' || tag.nodeName.toLowerCase() === 'h2' || tag.nodeName.toLowerCase() === 'h3') {
                     let html = `<h2>${tag.textContent}</h2>`
                     pTagsArray.push(html + ' ');
