@@ -181,6 +181,55 @@ a:active {
 }
 
 
+.dropdown-content3 {
+  position: absolute;
+
+  width: 100%;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content3 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.active3.dropdown-content3 {
+  display: block;
+  animation: slideIn1 0.3s ease-in-out;
+}
+
+
+.dropdown-content4 {
+  position: absolute;
+
+  width: 100%;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content4 a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.active4.dropdown-content4 {
+  display: block;
+  animation: slideIn1 0.3s ease-in-out;
+}
+
+
+
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -222,13 +271,20 @@ a:active {
 // }
 
 .createSpace {
-  padding-top: 1200px;
+  padding-top: 1130px;
 }
 
 .createSpace1 {
-  padding-top: 400px;
+  padding-top: 1040px;
 }
 
 .createSpace2 {
-  padding-top: 700px;
+  padding-top: 1060px;
+}
+
+.createSpace3 {
+  padding-top: 300px;
+}
+.createSpace4 {
+  padding-top: 340px;
 }
