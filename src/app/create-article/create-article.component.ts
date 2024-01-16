@@ -62,7 +62,6 @@ export class CreateArticleComponent {
     let p:any=localStorage.getItem('user')
     let user:any=JSON.parse(p)
     if(user.phoneNumber=='+917026912304' && user!=null){
-      console.log('user logged in')
     }
     else{
       this.router.navigateByUrl('/')
@@ -76,7 +75,7 @@ export class CreateArticleComponent {
     let user:any=JSON.parse(p)
 if(user!=null){
     if(user.phoneNumber=='+917026912304'){
-      console.log('user logged in')
+
     }
     else{
       this.router.navigateByUrl('/')
@@ -189,6 +188,9 @@ if(user!=null){
         class: grade1,
        questions: this.questions,
       };
+      // console.log(dataObject1)
+      // console.log(dataObject)
+
     } else {
       let b: any[] = [];
       b.push(formattedText);
@@ -212,8 +214,8 @@ if(user!=null){
        questions: this.questions,
       };
     }
-    console.log("dataobkect1")
-    console.log(dataObject1)
+    // console.log("dataobkect1")
+    // console.log(dataObject)
     //----------------------------------------------------------------------------//
     if (!this.isChecked) {
       if (result) {
@@ -396,12 +398,13 @@ if(user!=null){
     let subject = (document.getElementById('Subject') as HTMLInputElement)
       .value;
     let Page: any = (document.getElementById('Page') as HTMLInputElement).value;
-
     alldata.forEach((e: any) => {
       if (e.Subject == subject && e.topicName == topic) {
         (document.getElementById('topicdetails') as HTMLInputElement).value =
           e.Topicdetails;
-        tinymce.get('mytextarea').setContent(e.Text[Page - 1]);
+          let textbox=document.getElementById("mytextarea")as HTMLTextAreaElement
+  textbox.value=e.Text[Page - 1]
+       // tinymce.get('mytextarea').setContent(e.Text[Page - 1]);
         this.articletoBeModified = e;
       }
     });
@@ -462,7 +465,6 @@ if(user!=null){
     }
     else{
       this.paragraphTags.push(topicdetails)
-
     }
     let stringgen=this.paragraphTags.join(',')
 this.paratagscopy=this.paragraphTags
