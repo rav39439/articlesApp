@@ -108,8 +108,6 @@ if(user!=null){
   saveText() {
     let textbox=document.getElementById("mytextarea")as HTMLTextAreaElement
     const text=textbox.value
-    // console.log(text)
-    // const text = tinymce.get('mytextarea').getContent();
     let p = document.getElementById('text-written') as HTMLElement;
     p.innerHTML = text;
     this.saveData(text);
@@ -677,7 +675,9 @@ ntag=tag.split('[')[1]
       })
   }
 
-
+  toggleList(){
+    
+  }
 
 
 }

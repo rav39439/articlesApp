@@ -57,12 +57,12 @@
                   <li class="hj">
                     Phone no:7026912304
                   </li> -->
-          
+
                 </ul>
 
 
               </td>
-            
+
             </tr>
             <tr class="mt-5" style="margin-top:20px">
               <td colspan="2" bgcolor="#CCCCCC"><strong>ABOUT ME</strong></td>
@@ -71,10 +71,15 @@
 
 
             <tr>
-              <td colspan="2" class="pl-2.5" >
-                An ambitious, accomplished and dedicated Full Stack Developer with 2 years of experience in building and optimizing user-focused websites, applications and business intelligence solutions using wide range of programming utilities and languages.
-                 Expertise in requirements analysis, design, development, testing, maintenance, enhancement, and production support of business applications. Knowledgeable of backend and frontend development requirements. Collaborative team player with excellent technical abilities, seeking to leverage broad development experience and hands-on technical expertise in a challenging role of a reputed organization.
-                
+              <td colspan="2" class="pl-2.5">
+                An ambitious, accomplished and dedicated Full Stack Developer with 2 years of experience in building and
+                optimizing user-focused websites, applications and business intelligence solutions using wide range of
+                programming utilities and languages.
+                Expertise in requirements analysis, design, development, testing, maintenance, enhancement, and
+                production support of business applications. Knowledgeable of backend and frontend development
+                requirements. Collaborative team player with excellent technical abilities, seeking to leverage broad
+                development experience and hands-on technical expertise in a challenging role of a reputed organization.
+
               </td>
             </tr>
 
@@ -221,8 +226,26 @@
                     <td>
 
                       <div class="dropdown mt-2">
-                        <button class="dropdown-btn" (click)="toggleList()">JavaScript Projects</button>
+                        <button class="dropdown-btn" (click)="toggleList()" >JavaScript Projects</button>
                         <div class="dropdown-content" [ngClass]="{ 'active': isDropdownActive }">
+                          <!-- <div class="dropdown mt-2">
+                            <button class="dropdown-btn" (click)="toggleList()">JavaScript Projects</button>
+                            <div class="dropdown-content" [ngClass]="{ 'active': isDropdownActive }"> -->
+                              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                  <div class="carousel-item active">
+                                    <img class="d-block " [src]="currentImage" alt=""style="width:100%;height:300px">
+                                  </div>
+                                </div>
+                                <a class="carousel-control-prev" (click)="toggleright()" role="button" data-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" (click)="toggleleft()" role="button" data-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="sr-only">Next</span>
+                                </a> 
+                              </div>
                           <div style="display: grid; grid-template-columns: 20% 5% 75%;">
 
                             <p><b>Project Title</b></p>
@@ -243,7 +266,7 @@
                             <p>Project Details</p>
                             <p>:</p>
                             <p>
-                              
+
                               This application is an online portal where students can register themselves, access the
                               study material created by admin and write quiz which is also created by admin of this
                               website.
@@ -256,9 +279,12 @@
                               Admin
                               can interact with users through screen sharing and chat application.<br>
 
-                              There is another mini application below. The application is part of the above application but it
-                              is hosted in Github. This application contains books and articles . Also admin of the application
-                              https://newartilceapp.web.app/ has the power to publish new articles and books in this application
+                              There is another mini application below. The application is part of the above application
+                              but it
+                              is hosted in Github. This application contains books and articles . Also admin of the
+                              application
+                              https://newartilceapp.web.app/ has the power to publish new articles and books in this
+                              application
                             </p>
                           </div>
 
@@ -293,6 +319,22 @@
                           <br>
                           <hr>
                           <br>
+
+                          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img class="d-block " [src]="currentImage1" alt="First slide"style="width:100%;height:300px">
+                              </div>
+                            </div>
+                            <a class="carousel-control-prev" (click)="toggleright1()" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" (click)="toggleleft1()"  role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a> 
+                          </div>
                           <div style="display: grid; grid-template-columns: 20% 5% 75%;">
 
                             <p><b>Project Title</b></p>
@@ -332,6 +374,15 @@
                             <p>
                               <a href="https://github.com/rav39439/myblog"
                                 style="padding: 0px;">https://github.com/rav39439/myblog</a>
+                            </p>
+                          </div>
+
+                          <div style="display: grid; grid-template-columns: 20% 5% 75%;">
+                            <p>Website Link</p>
+                            <p>:</p>
+                            <p>
+                              <a href="https://newblogecomm.onrender.com"
+                                style="padding: 0px;">https://newblogecomm.onrender.com</a>
                             </p>
                           </div>
 
@@ -391,6 +442,21 @@
                       <div class="dropdown mt-2" id="hhjjdd2">
                         <button class="dropdown-btn" (click)="toggleList1()">ReactJS Projects</button>
                         <div class="dropdown-content1" [ngClass]="{ 'active1': isDropdownActive1 }">
+                          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img class="d-block " [src]="currentImage2" alt="First slide"style="width:100%;height:300px">
+                              </div>
+                            </div>
+                            <a class="carousel-control-prev" (click)="toggleright2()" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" (click)="toggleleft2()"  role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a> 
+                          </div>
                           <div style="display: grid; grid-template-columns: 20% 5% 75%;">
 
                             <p><b>Project Title</b></p>
@@ -430,10 +496,34 @@
                                 style="padding: 0px;">https://github.com/rav39439/Mernnewclient</a>
                             </p>
                           </div>
+
+                          <div style="display: grid; grid-template-columns: 20% 5% 75%;">
+                            <p>Website Link</p>
+                            <p>:</p>
+                            <p>
+                              <a href="https://ecommercewebshop.netlify.app"
+                                style="padding: 0px;">https://ecommercewebshop.netlify.app</a>
+                            </p>
+                          </div>
                           <br>
                           <hr>
                           <br>
 
+                          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img class="d-block " [src]="currentImage3" alt="First slide"style="width:100%;height:300px">
+                              </div>
+                            </div>
+                            <a class="carousel-control-prev" (click)="toggleright3()" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" (click)="toggleleft3()"  role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a> 
+                          </div>
                           <div style="display: grid; grid-template-columns: 20% 5% 75%;">
 
                             <p><b>Project Title</b></p>
@@ -453,17 +543,22 @@
                             <p>Project Details</p>
                             <p>:</p>
                             <p>
-                             This is copy of the project that I have worked on during my internship in NullStack pvt ltd. The application has some key features
-                             of Stackoverflow applications and the additional new features that I was given the task to add. The key features
-                             were:
-                            <li> The application helped the users to post questions and their doubts thereby helping them to communicate with the experts</li>
-                            <li> The application helped the experts to view and answer the questions posted by the other users.</li>
-                            <li> This application also helped the users to search the questions by making use of the tags on the dashboard.</li>
-                            <br>
-                             The added features in this application were
-                             <li> A chatbot to talk and message to registered experts</li>
-                             <li>  An otp login using phone number.</li>
-                             <li> A feature which can display the current user location on the map</li>
+                              This is copy of the project that I have worked on during my internship in NullStack pvt
+                              ltd. The application has some key features
+                              of Stackoverflow applications and the additional new features that I was given the task to
+                              add. The key features
+                              were:
+                              <li> The application helped the users to post questions and their doubts thereby helping
+                                them to communicate with the experts</li>
+                              <li> The application helped the experts to view and answer the questions posted by the
+                                other users.</li>
+                              <li> This application also helped the users to search the questions by making use of the
+                                tags on the dashboard.</li>
+                              <br>
+                              The added features in this application were
+                              <li> A chatbot to talk and message to registered experts</li>
+                              <li> An otp login using phone number.</li>
+                              <li> A feature which can display the current user location on the map</li>
                             </p>
                           </div>
 
@@ -599,17 +694,19 @@
                             <p>Technologies used</p>
                             <p>:</p>
                             <p>
-                               Angular JS (Frontend), firebase </p>
+                              Angular JS (Frontend), firebase </p>
                           </div>
 
                           <div style="display: grid; grid-template-columns: 20% 5% 75%;">
                             <p>Project Details</p>
                             <p>:</p>
                             <p>
-                           This is a chatBot that can answer the questions based on some different topics related to
-                           angular , javascript and some Python topics. It is build using javascript and firebase and answers the questions
-                           by using the tags in the questions and comparing them to tags inside the answers and gives the correct answer based on
-                           the match perecentage.
+                              This is a chatBot that can answer the questions based on some different topics related to
+                              angular , javascript and some Python topics. It is build using javascript and firebase and
+                              answers the questions
+                              by using the tags in the questions and comparing them to tags inside the answers and gives
+                              the correct answer based on
+                              the match perecentage.
                             </p>
                           </div>
 
@@ -644,6 +741,21 @@
                       <div class="dropdown mt-2 " id="hhjjdd3">
                         <button class="dropdown-btn" (click)="toggleList3()">Python Projects</button>
                         <div class="dropdown-content3" [ngClass]="{ 'active3': isDropdownActive3 }">
+                          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img class="d-block " [src]="currentImage4" alt="First slide"style="width:100%;height:300px">
+                              </div>
+                            </div>
+                            <a class="carousel-control-prev" (click)="toggleright4()" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" (click)="toggleleft4()"  role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a> 
+                          </div>
                           <div style="display: grid; grid-template-columns: 20% 5% 75%;">
 
                             <p><b>Project Title</b></p>
@@ -663,10 +775,14 @@
                             <p>Project Details</p>
                             <p>:</p>
                             <p>
-                              This is a simple Object-detection model that is created using keras and tensorFlow. The Model
-                              is trained by uploading and feeding images each depicting the state of a particular object and all the images for training
-                              are stored in a firebase project in cloud storage. The final trained model has a good accuracy and has the ability to
-                              predict correctly the state of the object. The correct prediction of the state can help us to
+                              This is a simple Object-detection model that is created using keras and tensorFlow. The
+                              Model
+                              is trained by uploading and feeding images each depicting the state of a particular object
+                              and all the images for training
+                              are stored in a firebase project in cloud storage. The final trained model has a good
+                              accuracy and has the ability to
+                              predict correctly the state of the object. The correct prediction of the state can help us
+                              to
                               determine whether the experiment will succeed or not.
                             </p>
                           </div>
@@ -708,9 +824,12 @@
                             <p>Project Details</p>
                             <p>:</p>
                             <p>
-                            The is a simple API for user Authentication using DOTNet.User can register using his username,email
-                            and a password. After registration , he can login using his username and password by generating a token
-                            valid upto certain time period. After the token is expired user is logged out and he has to login again.
+                              The is a simple API for user Authentication using DOTNet.User can register using his
+                              username,email
+                              and a password. After registration , he can login using his username and password by
+                              generating a token
+                              valid upto certain time period. After the token is expired user is logged out and he has
+                              to login again.
                             </p>
                           </div>
 
