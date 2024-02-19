@@ -592,7 +592,21 @@
                       <div class="dropdown mt-2 " id="hhjjdd1">
                         <button class="dropdown-btn" (click)="toggleList2()">Java and AngularJS Projects</button>
                         <div class="dropdown-content2" [ngClass]="{ 'active2': isDropdownActive2 }">
-
+                          <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img class="d-block " [src]="currentImage5" alt="First slide"style="width:100%;height:300px">
+                              </div>
+                            </div>
+                            <a class="carousel-control-prev" (click)="toggleright5()" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" (click)="toggleleft5()"  role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a> 
+                          </div>
                           <div style="display: grid; grid-template-columns: 20% 5% 75%;">
 
                             <p><b>Project Title</b></p>
