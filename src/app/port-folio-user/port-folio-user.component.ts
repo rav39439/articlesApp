@@ -72,12 +72,26 @@ images5 = [
   '../../assets/javapr9.PNG',
 
 ];
+
+images6 = [
+  '../../assets/java2pr1.PNG',
+  '../../assets/Java2pr2.PNG',
+  '../../assets/java2pr3.PNG',
+
+  '../../assets/java2pr4.PNG',
+  '../../assets/java2pr5.PNG',
+  '../../assets/java2pr6.PNG',
+  '../../assets/java2pr7.PNG',
+  '../../assets/java2pr8.PNG',
+
+];
 currentImage=this.images[0]
 currentImage1=this.images1[0]
 currentImage2=this.images2[0]
 currentImage3=this.images3[0]
 currentImage4=this.images4[0]
 currentImage5=this.images5[0]
+currentImage6=this.images6[0]
 
 Index=0
 Index1=0
@@ -85,6 +99,7 @@ Index2=0
 Index3=0
 Index4=0
 Index5=0
+Index6=0
 
 runChange(){
   setInterval(()=>{
@@ -120,8 +135,14 @@ if(this.Index4>1){
 
 this.currentImage5=this.images5[this.Index5]
 this.Index5=this.Index5+1
-if(this.Index5>1){
+if(this.Index5>8){
   this.Index5=0
+}
+
+this.currentImage6=this.images6[this.Index6]
+this.Index6=this.Index6+1
+if(this.Index6>7){
+  this.Index6=0
 }
   },5000)
 }
@@ -350,6 +371,30 @@ toggleleft5(){
   else{
     this.Index5=8
     this.currentImage5=this.images5[this.Index5]
+
+  }
+}
+
+toggleright6(){
+  if(this.Index6<this.images6.length){
+    this.Index6=this.Index6+1
+    this.currentImage6=this.images6[this.Index6]
+  }
+  else{
+    this.Index6=0
+    this.currentImage6=this.images6[this.Index6]
+
+  }
+  
+}
+toggleleft6(){
+  if(this.Index6>0){
+    this.Index6=this.Index6-1
+    this.currentImage6=this.images6[this.Index6]
+  }
+  else{
+    this.Index6=7
+    this.currentImage6=this.images6[this.Index6]
 
   }
 }
