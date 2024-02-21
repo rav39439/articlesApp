@@ -27,7 +27,11 @@ isDropdownActive4 = false;
 images = [
   '../../assets/newedu1.PNG',
   '../../assets/newed2.PNG',
-  '../../assets/newed3.PNG'
+  '../../assets/newed3.PNG',
+  '../../assets/javascript1.PNG',
+
+  '../../assets/javascript2.PNG'
+
 ];
 
 images1 = [
@@ -105,7 +109,7 @@ runChange(){
   setInterval(()=>{
 this.currentImage=this.images[this.Index]
 this.Index=this.Index+1
-if(this.Index>2){
+if(this.Index>4){
   this.Index=0
 }
 
@@ -249,7 +253,7 @@ toggleleft(){
     this.currentImage=this.images[this.Index]
   }
   else{
-    this.Index=2
+    this.Index=4
     this.currentImage=this.images[this.Index]
 
   }
